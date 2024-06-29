@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User List</title>
+    <link rel="stylesheet" href="/home.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="top">
+          <div class="logo">Health Stairs</div>
+          <a href="/logout" class="logout">Logout</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Gender</th>
+            <th>Date of Birth</th>
+            <th>Age</th>
+            <th>District</th>
+            <th>Blood Group</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let i = 0; i < 10; i++) { %>
+          <tr>
+            <% if (users[i]) { %>
+            <td><%= i + 1 %></td>
+            <td><%= users[i].name %></td>
+            <td><%= users[i].phone_number %></td>
+            <td><%= users[i].gender %></td>
+            <td><%= users[i].date_of_birth %></td>
+            <td><%= users[i].age %></td>
+            <td><%= users[i].district %></td>
+            <td><%= users[i].blood_group %></td>
+            <td>
+              <i
+                class="fa fa-trash-o delete"
+                style="color: red; cursor: pointer"
+                onclick="deleteUser('<%= users[i].id %>')"
+              ></i>
+            </td>
+            <% } else { %>
+            <td><%= i + 1 %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <% } %>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+      <div class="pagination">
+        <% if (currentPage > 1) { %>
+        <a href="/home?page=<%= currentPage - 1 %>" class="btn">Previous</a>
+        <% } %> <% for (let i = 1; i <= totalPages; i++) { %>
+        <a
+          href="/home?page=<%= i %>"
+          class="btn <%= currentPage === i ? 'active' : '' %>"
+          ><%= i %></a
+        >
+        <% } %> <% if (currentPage < totalPages) { %>
+        <a href="/home?page=<%= currentPage + 1 %>" class="btn">Next</a>
+        <% } %>
+      </div>
+    </div>
+
+    <script>
+      function deleteUser(userId) {
+        if (confirm("Are you sure you want to delete this user?")) {
+          fetch(`/deleteUser/${userId}`, {
+            method: "DELETE",
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                window.location.reload(); // Reload the page to refresh the user list
+              } else {
+                alert("Failed to delete user");
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("An error occurred while deleting the user");
+            });
+        }
+      }
+    </script>
+  </body>
+</html>
