@@ -72,6 +72,13 @@ const formatDate = (date) => {
   return `${day}/${month}/${year}`;
 };
 
+const Gender = {
+  Male: "পুরুষ",
+  Female: "নারী",
+  Other: "তৃতীয় লিঙ্গ",
+  None: "বলতে আগ্রহী নন",
+};
+
 app.get("/home", async (req, res) => {
   const token = req.cookies.token;
   if (!token) return res.redirect("/login");
@@ -97,6 +104,7 @@ app.get("/home", async (req, res) => {
         user.date_of_birth = user.date_of_birth
           ? formatDate(user.date_of_birth)
           : "";
+        user.gender = user.gender ? Gender[user.gender] : "";
       });
 
       const [[total]] = await pool.query("SELECT COUNT(*) as count FROM users");
