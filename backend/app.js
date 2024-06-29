@@ -1,13 +1,9 @@
-import express from "express";
-import { config } from "./config/index.js";
-import path from "path";
-import { fileURLToPath } from "url";
-import cookieParser from "cookie-parser";
-import jwt from "jsonwebtoken";
-import mysql from "mysql2/promise";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const express = require("express");
+const config = require("./config");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+const mysql = require("mysql2/promise");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -20,8 +16,8 @@ app.use(express.json()); // For parsing application/json
 const dbConfig = {
   host: config.DB_HOST,
   user: config.DB_USER,
-  password: config.DB_PASSWORD,
   database: config.DB_DATABASE,
+  password: config.DB_PASSWORD,
 };
 
 const pool = mysql.createPool(dbConfig);
@@ -59,8 +55,8 @@ app.post("/login", (req, res) => {
 
   res.render("login", {
     title: "Express and EJS",
-    message: "Invalid username or password",
-    error: "Invalid username or password",
+    message: `Invalid username or password`,
+    error: `Invalid username or password`,
   });
 });
 
@@ -116,7 +112,7 @@ app.get("/home", async (req, res) => {
       });
     } catch (error) {
       console.error("Database error:", error);
-      res.status(500).send("Internal Server Error");
+      res.status(500).send(error);
     }
   });
 });

@@ -1,6 +1,5 @@
-import { config as init } from "dotenv";
+require("dotenv").config();
 
-init();
 const PORT = process.env.PORT;
 const JWT_SECRET = process.env.JWT_SECRET;
 const DB_HOST = process.env.DB_HOST;
@@ -10,7 +9,7 @@ const DB_DATABASE = process.env.DB_DATABASE;
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
-export const config = {
+const config = {
   PORT,
   JWT_SECRET,
   DB_HOST,
@@ -20,3 +19,5 @@ export const config = {
   ADMIN_USERNAME,
   ADMIN_PASSWORD,
 };
+
+module.exports = config;
