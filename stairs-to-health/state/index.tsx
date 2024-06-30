@@ -1,28 +1,40 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { AppState, ContextValue, UserData } from "./index.type";
 
-// This hook can be used to access the user info.
-const context = createContext({
+const initValue = {
   isloading: true,
   isOnBoarded: false,
-  data: {},
+  data: {
+    id: "",
+    name: "",
+    phone_number: "",
+    gender: "",
+    date_of_birth: "",
+    district: "",
+    blood_group: "",
+    deviceId: "",
+    isSync: false,
+  },
+};
+
+const context = createContext<ContextValue>({
+  ...initValue,
+  setOnboarding: () => {},
+  setSync: () => {},
 });
 
 export function Provider(props: React.PropsWithChildren) {
-  const [appState, setAppState] = useState({
-    isloading: true,
-    isOnBoarded: false,
-    data: {},
-  });
+  const [appState, setAppState] = useState<AppState>(initValue);
 
   const loadContext = async () => {
     const data = await AsyncStorage.getItem("health-stair");
     if (!data) {
-      setAppState({
+      setAppState((state) => ({
+        ...state,
         isloading: false,
         isOnBoarded: false,
-        data: {},
-      });
+      }));
     } else {
       const parsed = JSON.parse(data);
       setAppState(parsed);
@@ -33,26 +45,22 @@ export function Provider(props: React.PropsWithChildren) {
     await AsyncStorage.setItem("health-stair", JSON.stringify(value));
   };
 
-  const setOnboarding = (data) => {
+  const setOnboarding = (data: UserData) => {
     setAppState((state) => ({
       ...state,
       isOnBoarded: true,
       data: {
-        ...state.data,
-        info: {
-          data,
-          isSync: false,
-        },
+        ...data,
       },
     }));
   };
-  const setTracker = (data) => {
+  const setSync = (value: boolean) => {
     setAppState((state) => ({
       ...state,
       isOnBoarded: true,
       data: {
         ...state.data,
-        tracker: data,
+        isSync: value,
       },
     }));
   };
@@ -66,7 +74,7 @@ export function Provider(props: React.PropsWithChildren) {
   }, [appState]);
 
   return (
-    <context.Provider value={{ ...appState, setOnboarding, setTracker }}>
+    <context.Provider value={{ ...appState, setOnboarding, setSync }}>
       {props.children}
     </context.Provider>
   );

@@ -12,6 +12,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { router } from "expo-router";
 import { useAppContext } from "@/state";
 import { useAppTheme } from "@/hooks/useAppTheme";
+import * as Application from "expo-application";
+import axios from "axios";
 export const Onboarding = () => {
   const { Colors } = useAppTheme();
   const { setOnboarding } = useAppContext();
@@ -25,8 +27,32 @@ export const Onboarding = () => {
   });
 
   const submitHandler = async (values: typeof onboardingFormInitValue) => {
-    setOnboarding(values);
-    router.replace("/");
+    const payload = {
+      ...values,
+      deviceId: Application.getAndroidId(),
+    };
+    try {
+      const response = await axios.post(
+        "http://healthstairs.seracnetwork.net/saveUser",
+        {
+          ...payload,
+          district: (
+            payload.district as unknown as { label: string; value: string }
+          ).value,
+        }
+      );
+      setOnboarding({
+        ...response.data.user,
+        isSync: true,
+      });
+    } catch (error) {
+      setOnboarding({
+        ...payload,
+        isSync: false,
+      });
+    } finally {
+      router.replace("/");
+    }
   };
 
   return (
@@ -82,7 +108,7 @@ export const Onboarding = () => {
               )}
             />
             <Controller
-              name="mobile"
+              name="phone_number"
               control={control}
               render={({ field: { onChange, value } }) => (
                 <UInput
@@ -90,7 +116,7 @@ export const Onboarding = () => {
                   keyboardType="phone-pad"
                   onChangeText={onChange}
                   value={value}
-                  error={errors.mobile && errors.mobile.message}
+                  error={errors.phone_number && errors.phone_number.message}
                 />
               )}
             />

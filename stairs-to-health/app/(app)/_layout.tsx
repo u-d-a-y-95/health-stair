@@ -5,10 +5,11 @@ import { ms } from "@/utils/sizes";
 import { useFonts } from "expo-font";
 import { useAppContext } from "@/state";
 import { useAppTheme } from "@/hooks/useAppTheme";
+import NetInfo from "@react-native-community/netinfo";
 
 export default function TabLayout() {
   const { Colors } = useAppTheme();
-  const { isloading, isOnBoarded } = useAppContext();
+  const { isloading, isOnBoarded, data } = useAppContext();
   const [loaded] = useFonts({
     SpaceMono: require("../../assets/fonts/SpaceMono-Regular.ttf"),
   });
@@ -24,6 +25,16 @@ export default function TabLayout() {
   }
 
   if (loaded && !isOnBoarded) return <Redirect href="/onboarding" />;
+
+  React.useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      if (state.isConnected) {
+        if (!data.isSync) {
+        }
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   return (
     <Tabs

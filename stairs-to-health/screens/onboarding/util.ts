@@ -2,13 +2,13 @@ import { z } from "zod";
 
 export const onboardingFormInitValue = {
   name: "",
-  mobile: "",
+  phone_number: "",
   district: "",
 };
 
 export const formSchema = z.object({
   name: z.string().min(1, "অনুগ্রহ করে নামটি প্রদান করুন"),
-  mobile: z
+  phone_number: z
     .string()
     .min(1, "অনুগ্রহ করে সঠিক মোবাইল নম্বর প্রদান করুন।")
     .regex(

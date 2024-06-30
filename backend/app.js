@@ -118,24 +118,27 @@ app.get("/home", async (req, res) => {
 });
 
 // New addUser endpoint
-app.post("/addUser", async (req, res) => {
-  const { name, phone_number, district, gender, date_of_birth, blood_group } =
-    req.body;
+app.post("/saveUser", async (req, res) => {
+  const {
+    id,
+    name,
+    phone_number,
+    district,
+    gender,
+    date_of_birth,
+    blood_group,
+    deviceId,
+  } = req.body;
 
   // Ensure required fields are present
-  if (!name || !phone_number || !district) {
-    return res
-      .status(400)
-      .json({ error: "Name, phone_number, and district are required" });
+  if (!name || !phone_number || !district || !deviceId) {
+    return res.status(400).json({
+      error: "Name, phone number, district, and device ID are required",
+    });
   }
 
   try {
-    const query = `
-        INSERT INTO users (name, phone_number, gender, date_of_birth, district, blood_group)
-        VALUES (?, ?, ?, ?, ?, ?)
-      `;
-
-    // Prepare values array based on provided fields
+    let query;
     const values = [
       name,
       phone_number,
@@ -144,15 +147,62 @@ app.post("/addUser", async (req, res) => {
       district,
       blood_group || null,
     ];
+    let result;
 
-    await pool.query(query, values);
-    res.status(201).json({ message: "User added successfully" });
+    let _id = id;
+
+    if (_id) {
+      // Update existing user
+      query = `
+        UPDATE users
+        SET name = ?, phone_number = ?, gender = ?, date_of_birth = ?, district = ?, blood_group = ?
+        WHERE id = ?
+      `;
+      values.push(id);
+      [result] = await pool.query(query, values);
+    } else {
+      // Check if user exists with the same deviceId and phone_number
+      const [existingUsers] = await pool.query(
+        "SELECT * FROM users WHERE deviceId = ? AND phone_number = ?",
+        [deviceId, phone_number]
+      );
+
+      if (existingUsers.length > 0) {
+        _id = existingUsers[0].id;
+        // Update existing user
+        query = `
+          UPDATE users
+          SET name = ?, phone_number = ?, gender = ?, date_of_birth = ?, district = ?, blood_group = ?
+          WHERE id = ?
+        `;
+        values.push(_id);
+        [result] = await pool.query(query, values);
+      } else {
+        // Create new user
+        query = `
+          INSERT INTO users (name, phone_number, gender, date_of_birth, district, blood_group, deviceId)
+          VALUES (?, ?, ?, ?, ?, ?, ?)
+        `;
+        values.push(deviceId);
+        [result] = await pool.query(query, values);
+
+        _id = result.insertId;
+      }
+    }
+
+    // Retrieve the latest user data
+    const [rows] = await pool.query("SELECT * FROM users WHERE id = ?", [_id]);
+
+    res.status(200).json({
+      message: id ? "User updated successfully" : "User created successfully",
+      affectedRows: result.affectedRows,
+      user: rows[0],
+    });
   } catch (error) {
     console.error("Database error:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
 app.delete("/deleteUser/:id", async (req, res) => {
   const userId = req.params.id;
 
