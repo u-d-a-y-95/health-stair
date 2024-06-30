@@ -26,15 +26,15 @@ export default function TabLayout() {
 
   if (loaded && !isOnBoarded) return <Redirect href="/onboarding" />;
 
-  React.useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state) => {
-      if (state.isConnected) {
-        if (!data.isSync) {
-        }
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+  // React.useEffect(() => {
+  //   const unsubscribe = NetInfo.addEventListener((state) => {
+  //     if (state.isConnected) {
+  //       if (!data.isSync) {
+  //       }
+  //     }
+  //   });
+  //   return () => unsubscribe();
+  // }, []);
 
   return (
     <Tabs

@@ -16,7 +16,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const Home = () => {
   const { data } = useAppContext();
-  console.log(data);
+
   return (
     <SafeScreen
       styles={{
@@ -35,9 +35,9 @@ export const Home = () => {
           }}
         >
           <UText size="xl" weight="900" type="primary">
-            {data.name}
+            {data.name.trim()}
           </UText>
-          <UText size="sm">{data.phone_number}</UText>
+          <UText size="sm">{data.phone_number.trim()}</UText>
         </View>
         <View style={{ marginTop: hs(20) }}>
           <View
@@ -108,14 +108,13 @@ export const Home = () => {
           <EmergencyCard {...EmergencyContent} />
         </View>
 
-        <UButton
+        {/* <UButton
           onPress={async () => {
-            console.log("hello");
             await AsyncStorage.clear();
           }}
         >
           Clear
-        </UButton>
+        </UButton> */}
       </ScrollView>
     </SafeScreen>
   );

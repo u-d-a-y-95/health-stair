@@ -2,6 +2,7 @@ import { stages } from "@/data/pregnancy";
 import { ImageComponent } from "@/screens/education/components/details-component/image";
 import { ListComponent } from "@/screens/education/components/details-component/list";
 import { PlainTextComponent } from "@/screens/education/components/details-component/plainText";
+import { UserData } from "@/state/index.type";
 
 export const findStageByDays = (days: number) => {
   for (let i = stages.length - 1; i >= 0; i--) {
@@ -88,4 +89,13 @@ export const getComponent = (type: string) => {
     default:
       return null;
   }
+};
+
+export const getPayload = (values: UserData) => {
+  return {
+    ...values,
+    district: (values.district as unknown as { label: string; value: string })
+      .value,
+    ...(values.gender && { gender: values.gender.value }),
+  };
 };

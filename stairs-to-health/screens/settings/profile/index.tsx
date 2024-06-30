@@ -2,32 +2,50 @@ import { SafeScreen } from "@/components/safeScreen";
 import { UButton } from "@/components/uComponents/uButton";
 import { UInput } from "@/components/uComponents/uInput";
 import { USelect } from "@/components/uComponents/uSelect";
-import { UText } from "@/components/uComponents/uText";
-import { districts } from "@/data";
-import { SCREEN_HEIGHT, hs, ws } from "@/utils/sizes";
+import { districts, genders } from "@/data";
+import { hs, ws } from "@/utils/sizes";
 import { Controller, useForm } from "react-hook-form";
-import { KeyboardAvoidingView, View } from "react-native";
-import { formSchema, onboardingFormInitValue } from "./util";
+import {
+  KeyboardAvoidingView,
+  ScrollView,
+  ToastAndroid,
+  View,
+} from "react-native";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { router } from "expo-router";
 import { useAppContext } from "@/state";
-import { useAppTheme } from "@/hooks/useAppTheme";
 import * as Application from "expo-application";
 import axios from "axios";
+import { formSchema, formInitValue } from "./util";
+import { UDatePicker } from "@/components/uComponents/uDatePicker";
+import { useEffect } from "react";
 import { getPayload } from "@/utils";
-export const Onboarding = () => {
-  const { Colors } = useAppTheme();
-  const { setOnboarding } = useAppContext();
+
+export const Profile = () => {
+  const { setOnboarding, data } = useAppContext();
   const {
+    reset,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm({
-    defaultValues: onboardingFormInitValue,
+    defaultValues: formInitValue,
     resolver: zodResolver(formSchema),
+    reValidateMode: "onBlur",
   });
 
-  const submitHandler = async (values: typeof onboardingFormInitValue) => {
+  useEffect(() => {
+    reset(
+      {
+        ...data,
+        district: districts.find((item) => item.value === data.district) || "",
+        gender: genders.find((item) => item.value === data.gender) || "",
+        date_of_birth: data.date_of_birth || "",
+      },
+      { keepValues: false, keepDefaultValues: true }
+    );
+  }, [data]);
+
+  const submitHandler = async (values: typeof formInitValue) => {
     const payload = {
       ...getPayload(values),
       deviceId: Application.getAndroidId(),
@@ -37,6 +55,7 @@ export const Onboarding = () => {
         "http://healthstairs.seracnetwork.net/saveUser",
         payload
       );
+
       setOnboarding({
         ...response.data.user,
         isSync: true,
@@ -47,47 +66,22 @@ export const Onboarding = () => {
         isSync: false,
       });
     } finally {
-      router.replace("/");
+      ToastAndroid.show("Date is save successfully!", ToastAndroid.SHORT);
     }
   };
-
   return (
-    <SafeScreen styles={[{ paddingHorizontal: 0 }]}>
-      <View
-        style={{
-          backgroundColor: Colors.primary,
-          flex: 1,
-          justifyContent: "space-between",
-        }}
-      >
-        <View
-          style={{
-            height: SCREEN_HEIGHT > 750 ? "50%" : "40%",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <UText
-            size="xl"
-            weight="bold"
-            align="center"
-            styles={{ color: "white" }}
-          >
-            স্বাস্থ্যসিঁড়িতে স্বাগতম
-          </UText>
-        </View>
+    <SafeScreen styles={[{ paddingHorizontal: 0, flex: 1 }]}>
+      <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <KeyboardAvoidingView
           style={{
             flex: 1,
             flexGrow: 1,
+            paddingHorizontal: ws(20),
           }}
         >
           <View
             style={{
               flex: 1,
-              marginTop: hs(16),
-              padding: ws(20),
-              backgroundColor: "white",
               gap: hs(15),
             }}
           >
@@ -96,7 +90,7 @@ export const Onboarding = () => {
               control={control}
               render={({ field: { onChange, value } }) => (
                 <UInput
-                  label="আপনার নাম দিন"
+                  label="নাম"
                   onChangeText={onChange}
                   value={value}
                   error={errors.name && errors.name.message}
@@ -108,7 +102,7 @@ export const Onboarding = () => {
               control={control}
               render={({ field: { onChange, value } }) => (
                 <UInput
-                  label="আপনার মোবাইল নম্বর দিন"
+                  label="মোবাইল"
                   keyboardType="phone-pad"
                   onChangeText={onChange}
                   value={value}
@@ -117,13 +111,40 @@ export const Onboarding = () => {
               )}
             />
             <Controller
+              name="date_of_birth"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <UDatePicker
+                    label="জন্ম তারিখ"
+                    value={value}
+                    onChange={onChange}
+                  />
+                </>
+              )}
+            />
+            <Controller
               name="district"
               control={control}
               render={({ field: { onChange, value } }) => (
                 <>
                   <USelect
-                    label="আপনার জেলা নির্বাচন করুন"
+                    label="জেলা"
                     data={districts}
+                    onChange={onChange}
+                    value={value}
+                  />
+                </>
+              )}
+            />
+            <Controller
+              name="gender"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <USelect
+                    label="লিঙ্গ"
+                    data={genders}
                     onChange={onChange}
                     value={value}
                   />
@@ -137,7 +158,7 @@ export const Onboarding = () => {
             </View>
           </View>
         </KeyboardAvoidingView>
-      </View>
+      </ScrollView>
     </SafeScreen>
   );
 };

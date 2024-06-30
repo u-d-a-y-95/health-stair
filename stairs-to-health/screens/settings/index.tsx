@@ -4,8 +4,10 @@ import { View } from "react-native";
 import { SettingsListItem } from "./components/settingsListItems";
 import { router } from "expo-router";
 import { useAppTheme } from "@/hooks/useAppTheme";
+import { useAppContext } from "@/state";
 
-export const Settings = ({}) => {
+export const Settings = () => {
+  const { data } = useAppContext();
   const { Colors } = useAppTheme();
   const navigate = (url: string) => {
     router.push(url);
@@ -21,9 +23,10 @@ export const Settings = ({}) => {
       >
         <View style={{ alignItems: "center", marginVertical: hs(10) }}>
           <UText size="xl" weight="bold" type="primary">
-            রহিমা খাতুন
+            {data.name}
           </UText>
-          <UText size="sm">+8801830546042</UText>
+          <UText size="sm">{data.phone_number}</UText>
+          <UText size="sm">{data.district}</UText>
         </View>
       </View>
       <View
@@ -35,7 +38,11 @@ export const Settings = ({}) => {
           justifyContent: "center",
         }}
       >
-        <SettingsListItem title="প্রোফাইল" url="" onPress={navigate} />
+        <SettingsListItem
+          title="প্রোফাইল"
+          url="/settings/profile"
+          onPress={navigate}
+        />
         <SettingsListItem
           title="কপি রাইট"
           url="/settings/copyright"

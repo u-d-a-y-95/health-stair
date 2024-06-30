@@ -37,7 +37,10 @@ export function Provider(props: React.PropsWithChildren) {
       }));
     } else {
       const parsed = JSON.parse(data);
-      setAppState(parsed);
+      setAppState({
+        ...parsed,
+        isloading: false,
+      });
     }
   };
 

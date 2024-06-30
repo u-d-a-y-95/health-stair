@@ -11,13 +11,20 @@ import {
 import { UText } from "../uText";
 import { hs } from "@/utils/sizes";
 
-export const USelect = ({ data, onSelect, label }) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(null);
+type Item = { label: string; value: string };
 
-  const handleSelect = (item) => {
-    setSelectedValue(item);
-    onSelect(item);
+type USelectProps = {
+  data: Item[];
+  label: string;
+  value: Item;
+  onChange: (item: Item) => void;
+};
+
+export const USelect = ({ data, onChange, label, value }: USelectProps) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleSelect = (item: Item) => {
+    onChange(item);
     setModalVisible(false);
   };
 
@@ -32,9 +39,7 @@ export const USelect = ({ data, onSelect, label }) => {
         style={[styles.dropdown, { marginTop: hs(5) }]}
         onPress={() => setModalVisible(true)}
       >
-        <UText size="sm">
-          {selectedValue ? selectedValue.label : "অপশন নির্বাচন করুন"}
-        </UText>
+        <UText size="sm">{value ? value.label : "অপশন নির্বাচন করুন"}</UText>
       </TouchableOpacity>
 
       <Modal
@@ -46,7 +51,7 @@ export const USelect = ({ data, onSelect, label }) => {
           style={styles.modalOverlay}
           onPress={() => setModalVisible(false)}
         >
-          <View style={[styles.modalContent, { flex: 1 }]}>
+          <View style={[styles.modalContent]}>
             <FlashList
               estimatedItemSize={200}
               data={data}
@@ -90,6 +95,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: "80%",
+    flexGrow: 1,
     maxHeight: "50%",
     backgroundColor: "white",
     borderRadius: 5,

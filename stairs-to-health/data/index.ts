@@ -56,8 +56,8 @@ export const districts = [
 ];
 
 export const genders = [
-  { label: "নারী", value: "option1" },
-  { label: "পুরুষ", value: "option2" },
-  { label: "তৃতীয় লিঙ্গ", value: "option3" },
-  { label: "বলতে আগ্রহী নন", value: "option3" },
+  { label: "নারী", value: "Female" },
+  { label: "পুরুষ", value: "Male" },
+  { label: "তৃতীয় লিঙ্গ", value: "Other" },
+  { label: "বলতে আগ্রহী নন", value: "None" },
 ];
