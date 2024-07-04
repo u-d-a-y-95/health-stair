@@ -4,7 +4,8 @@ import { UButton } from "@/components/uComponents/uButton";
 import { UCalendar } from "@/components/uComponents/uCalendars";
 import { USpace } from "@/components/uComponents/uSpace";
 import { UText } from "@/components/uComponents/uText";
-import { pregnancyKnowledge } from "@/data/clinic";
+import { pregnancyKnowledge } from "@/data/pregnancy";
+
 import { hs, ms } from "@/utils/sizes";
 import { router } from "expo-router";
 import { useState } from "react";
