@@ -15,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppContext } from "@/state";
 import * as Application from "expo-application";
 import axios from "axios";
-import { formSchema, formInitValue } from "./util";
+import { formSchema, formInitValue, saveData } from "./util";
 import { UDatePicker } from "@/components/uComponents/uDatePicker";
 import { useEffect } from "react";
 import { getPayload } from "@/utils";
@@ -50,24 +50,9 @@ export const Profile = () => {
       ...getPayload(values),
       deviceId: Application.getAndroidId(),
     };
-    try {
-      const response = await axios.post(
-        "http://healthstairs.seracnetwork.net/saveUser",
-        payload
-      );
-
-      setOnboarding({
-        ...response.data.user,
-        isSync: true,
-      });
-    } catch (error) {
-      setOnboarding({
-        ...payload,
-        isSync: false,
-      });
-    } finally {
-      ToastAndroid.show("Date is save successfully!", ToastAndroid.SHORT);
-    }
+    await saveData(payload, setOnboarding, () => {
+      ToastAndroid.show("Data is save successfully!", ToastAndroid.SHORT);
+    });
   };
   return (
     <SafeScreen styles={[{ paddingHorizontal: 0, flex: 1 }]}>
@@ -153,7 +138,7 @@ export const Profile = () => {
             />
             <View>
               <UButton onPress={handleSubmit(submitHandler)}>
-                সংরক্ষ করুন
+                সংরক্ষণ করুন
               </UButton>
             </View>
           </View>

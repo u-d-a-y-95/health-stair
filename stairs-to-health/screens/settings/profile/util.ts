@@ -1,3 +1,4 @@
+import axios from "axios";
 import { z } from "zod";
 
 export const formInitValue = {
@@ -30,3 +31,24 @@ export const formSchema = z.object({
   ]),
   date_of_birth: z.union([z.date(), z.string().optional()]),
 });
+
+export const saveData = async (payload, setOnboarding, cb) => {
+  try {
+    const response = await axios.post(
+      "http://healthstairs.seracnetwork.net/saveUser",
+      payload
+    );
+
+    setOnboarding({
+      ...response.data.user,
+      isSync: true,
+    });
+  } catch (error) {
+    setOnboarding({
+      ...payload,
+      isSync: false,
+    });
+  } finally {
+    cb();
+  }
+};

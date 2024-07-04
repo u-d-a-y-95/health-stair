@@ -6,10 +6,12 @@ import { useFonts } from "expo-font";
 import { useAppContext } from "@/state";
 import { useAppTheme } from "@/hooks/useAppTheme";
 import NetInfo from "@react-native-community/netinfo";
+import { saveData } from "@/screens/settings/profile/util";
+import { ToastAndroid } from "react-native";
 
 export default function TabLayout() {
   const { Colors } = useAppTheme();
-  const { isloading, isOnBoarded, data } = useAppContext();
+  const { isloading, isOnBoarded, data, setOnboarding } = useAppContext();
   const [loaded] = useFonts({
     SpaceMono: require("../../assets/fonts/SpaceMono-Regular.ttf"),
   });
@@ -20,21 +22,22 @@ export default function TabLayout() {
     }
   }, [loaded]);
 
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      if (state.isConnected && !loaded && isOnBoarded) {
+        if (!data.isSync) {
+          saveData(data, setOnboarding, () => {});
+        }
+      }
+    });
+    return () => unsubscribe();
+  }, [loaded, isOnBoarded]);
+
   if (!loaded || isloading) {
     return null;
   }
 
   if (loaded && !isOnBoarded) return <Redirect href="/onboarding" />;
-
-  // React.useEffect(() => {
-  //   const unsubscribe = NetInfo.addEventListener((state) => {
-  //     if (state.isConnected) {
-  //       if (!data.isSync) {
-  //       }
-  //     }
-  //   });
-  //   return () => unsubscribe();
-  // }, []);
 
   return (
     <Tabs
@@ -81,6 +84,11 @@ export default function TabLayout() {
       />
       <Tabs.Screen
         name="pregnancyCalculator"
+        listeners={({ navigation, route, ...rest }) => ({
+          tabPress: (e) => {
+            navigation.navigate("pregnancyCalculator", { screen: "index" });
+          },
+        })}
         options={{
           tabBarIcon: ({ focused, color }) => (
             <Ionicons
