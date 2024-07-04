@@ -132,7 +132,7 @@ export const Onboarding = () => {
             />
             <View>
               <UButton onPress={handleSubmit(submitHandler)}>
-                সংরক্ষ করুন
+                সংরক্ষণ করুন
               </UButton>
             </View>
           </View>
