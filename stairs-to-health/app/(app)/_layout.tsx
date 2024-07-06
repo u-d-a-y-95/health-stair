@@ -5,10 +5,8 @@ import { ms } from "@/utils/sizes";
 import { useFonts } from "expo-font";
 import { useAppContext } from "@/state";
 import { useAppTheme } from "@/hooks/useAppTheme";
-import NetInfo from "@react-native-community/netinfo";
-import { saveData } from "@/screens/settings/profile/util";
-import { ToastAndroid } from "react-native";
 
+SplashScreen.preventAutoHideAsync();
 export default function TabLayout() {
   const { Colors } = useAppTheme();
   const { isloading, isOnBoarded, data, setOnboarding } = useAppContext();
@@ -18,26 +16,28 @@ export default function TabLayout() {
 
   useEffect(() => {
     if (loaded) {
-      SplashScreen.hideAsync();
+      setTimeout(() => {
+        SplashScreen.hideAsync();
+      }, 3000);
     }
   }, [loaded]);
-
-  useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state) => {
-      if (state.isConnected && !loaded && isOnBoarded) {
-        if (!data.isSync) {
-          saveData(data, setOnboarding, () => {});
-        }
-      }
-    });
-    return () => unsubscribe();
-  }, [loaded, isOnBoarded]);
 
   if (!loaded || isloading) {
     return null;
   }
 
   if (loaded && !isOnBoarded) return <Redirect href="/onboarding" />;
+
+  // useEffect(() => {
+  //   const unsubscribe = NetInfo.addEventListener((state) => {
+  //     if (state.isConnected && !loaded && isOnBoarded) {
+  //       if (!data.isSync) {
+  //         saveData(data, setOnboarding, () => {});
+  //       }
+  //     }
+  //   });
+  //   return () => unsubscribe();
+  // }, []);
 
   return (
     <Tabs

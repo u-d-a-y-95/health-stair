@@ -5,18 +5,10 @@ import { workCenters } from "@/data/settings";
 import { SCREEN_HEIGHT, hs, ms, ws } from "@/utils/sizes";
 import { ScrollView, View } from "react-native";
 
-const images = [
-  require("@/assets/images/settings/aboutus/1.png"),
-  require("@/assets/images/settings/aboutus/3.png"),
-  require("@/assets/images/settings/aboutus/4.png"),
-];
-
 export const AboutUs = () => {
   return (
-    <SafeScreen styles={[{ paddingHorizontal: 0, backgroundColor: "white" }]}>
-      <UImageSlider images={images} height={SCREEN_HEIGHT / 2} />
-
-      <ScrollView style={[{ padding: ms(10) }]}>
+    <SafeScreen styles={{ paddingHorizontal: ms(10) }}>
+      <ScrollView>
         <UText size="sm" align="justify">
           <UText type="primary" weight="bold">
             {"সিরাক-বাংলাদেশ "}

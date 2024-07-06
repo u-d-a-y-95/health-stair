@@ -1,13 +1,15 @@
 import { Stack } from "expo-router";
 import { getStackScreenOption } from "../../../utils/navigation";
 import { educationList } from "@/data/education";
+import { Ionicons } from "@expo/vector-icons";
+import { ms } from "@/utils/sizes";
 
 export default function RootLayout() {
   return (
     <Stack>
       <Stack.Screen
         name="index"
-        options={{ ...getStackScreenOption("শিক্ষা কেন্দ্র") }}
+        options={{ ...getStackScreenOption("স্বাস্থ্য তথ্য") }}
       />
       <Stack.Screen
         name="subcategory/[id]"
@@ -15,7 +17,7 @@ export default function RootLayout() {
           const { id } = route.params;
           const category = educationList[Number(id) - 1];
           return {
-            ...getStackScreenOption(category.categoryTitle),
+            ...getStackScreenOption(category.categoryTitle, true),
           };
         }}
       />
@@ -25,7 +27,7 @@ export default function RootLayout() {
           const { id } = route.params;
           const category = educationList[Number(id)];
           return {
-            ...getStackScreenOption(category.categoryTitle),
+            ...getStackScreenOption(category.categoryTitle, true),
           };
         }}
       />
@@ -42,7 +44,8 @@ export default function RootLayout() {
           const [categoryId, subcategoryId] = id.split(":");
           return {
             ...getStackScreenOption(
-              educationList[categoryId].subcategories[subcategoryId - 1].title
+              educationList[categoryId].subcategories[subcategoryId - 1].title,
+              true
             ),
           };
         }}

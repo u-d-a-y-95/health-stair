@@ -8,7 +8,7 @@ import { ImageBackground, Pressable, View } from "react-native";
 export const Clinic = () => {
   return (
     <SafeScreen styles={{ padding: ms(10), backgroundColor: "white" }}>
-      <UText weight="500" align="left">
+      <UText weight="700" align="center">
         নিকটস্থ স্বাস্থকেন্দ্র নির্বাচন করুন
       </UText>
       <View

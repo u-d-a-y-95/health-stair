@@ -35,7 +35,7 @@ export const Home = () => {
           }}
         >
           <UText size="xl" weight="900" type="primary">
-            {data.name.trim()}
+            {data?.name?.trim()}
           </UText>
           <UText size="sm">{data.phone_number.trim()}</UText>
         </View>

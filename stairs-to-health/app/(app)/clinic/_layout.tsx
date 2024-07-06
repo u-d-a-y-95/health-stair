@@ -15,7 +15,7 @@ export default function ClinicLayout() {
           const { id } = route.params;
           const category = clinics[Number(id) - 1];
           return {
-            ...getStackScreenOption(category.title),
+            ...getStackScreenOption(category.title, true),
           };
         }}
       />

@@ -28,7 +28,7 @@ export function Provider(props: React.PropsWithChildren) {
   const [appState, setAppState] = useState<AppState>(initValue);
 
   const loadContext = async () => {
-    const data = await AsyncStorage.getItem("health-stair");
+    const data = await AsyncStorage.getItem("health-stair-beta-3");
     if (!data) {
       setAppState((state) => ({
         ...state,

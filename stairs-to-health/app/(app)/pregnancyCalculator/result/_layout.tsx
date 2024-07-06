@@ -1,17 +1,14 @@
-import { useAppTheme } from "@/hooks/useAppTheme";
+import { getStackScreenOption } from "@/utils/navigation";
 import { Stack } from "expo-router";
 
 export default function RootLayout() {
-  const { ScreenOptions } = useAppTheme();
   return (
-    <Stack
-      screenOptions={{
-        ...ScreenOptions,
-      }}
-    >
+    <Stack>
       <Stack.Screen
         name="[date]"
-        options={{ headerTitle: "গর্ভাবস্থার ফলাফল" }}
+        options={{
+          ...getStackScreenOption("গর্ভাবস্থার ফলাফল", true),
+        }}
       />
     </Stack>
   );

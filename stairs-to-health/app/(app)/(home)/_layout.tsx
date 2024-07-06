@@ -8,7 +8,7 @@ export default function RootLayout() {
       <Stack.Screen
         name="emergency"
         options={{
-          ...getStackScreenOption("জরুরী সেবা"),
+          ...getStackScreenOption("জরুরী সেবা", true),
         }}
       />
       <Stack.Screen
@@ -17,7 +17,8 @@ export default function RootLayout() {
           const { id } = route.params;
           return {
             ...getStackScreenOption(
-              EmergencyContent.subcategories[id - 1].title
+              EmergencyContent.subcategories[id - 1].title,
+              true
             ),
           };
         }}

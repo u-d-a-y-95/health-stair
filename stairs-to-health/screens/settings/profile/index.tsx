@@ -61,7 +61,7 @@ export const Profile = () => {
           style={{
             flex: 1,
             flexGrow: 1,
-            paddingHorizontal: ws(20),
+            paddingHorizontal: ws(10),
           }}
         >
           <View

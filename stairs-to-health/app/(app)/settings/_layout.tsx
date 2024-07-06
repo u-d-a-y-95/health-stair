@@ -8,17 +8,22 @@ export default function SettingsRootLayout() {
         name="index"
         options={{ ...getStackScreenOption("সেটিংস") }}
       />
-      <Stack.Screen name="aboutus" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="aboutus"
+        options={{
+          ...getStackScreenOption("আমাদের সম্পর্কে", true),
+        }}
+      />
       <Stack.Screen
         name="copyright"
         options={{
-          ...getStackScreenOption("কপি রাইট"),
+          ...getStackScreenOption("কপি রাইট", true),
         }}
       />
       <Stack.Screen
         name="profile"
         options={{
-          ...getStackScreenOption("প্রোফাইল"),
+          ...getStackScreenOption("প্রোফাইল", true),
         }}
       />
     </Stack>

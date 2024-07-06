@@ -92,7 +92,7 @@ export const clinics = [
           require("@/assets/images/clinics/5-3.jpg"),
         ],
         maps: [require("@/assets/images/clinics/location/5.png")],
-        coordinates: [24.7451702910192, 90.41544721610614],
+        coordinates: [24.743580281655515, 90.40750788214375],
       },
       {
         id: 6,
@@ -145,7 +145,7 @@ export const clinics = [
           require("@/assets/images/clinics/8-3.jpg"),
         ],
         maps: [require("@/assets/images/clinics/location/8.png")],
-        coordinates: [24.745687289786428, 90.40824358220907],
+        coordinates: [24.7457158371085, 90.40824564230516],
       },
       {
         id: 9,
@@ -265,7 +265,7 @@ export const clinics = [
           require("@/assets/images/clinics/14-3.jpg"),
         ],
         maps: [require("@/assets/images/clinics/location/14.png")],
-        coordinates: [24.877676761555907, 90.73030082850207],
+        coordinates: [24.87778162906253, 90.73033927528776],
       },
       {
         id: 3,
@@ -319,7 +319,7 @@ export const clinics = [
           require("@/assets/images/clinics/17-5.png"),
         ],
         maps: [require("@/assets/images/clinics/location/16.png")],
-        coordinates: [24.746724439421705, 90.40844942019764],
+        coordinates: [24.898002193620126, 90.7373724871718],
       },
       {
         id: 6,
