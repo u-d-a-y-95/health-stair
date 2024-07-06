@@ -20,7 +20,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.uday.stairstohealth"
+      "package": "com.uday.healthstairs"
     },
     "web": {
       "bundler": "metro",
@@ -46,7 +46,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "14a8f4f8-9eb3-440c-a324-ae8a9bd04fdb"
+        "projectId": "b4610bdc-5f97-4728-9e0e-996a17440f30"
       }
     }
   }
