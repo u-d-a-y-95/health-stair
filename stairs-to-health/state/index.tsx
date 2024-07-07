@@ -18,6 +18,8 @@ const initValue = {
   },
 };
 
+const STORAGE_NAME = "health-stair-beta-3";
+
 const context = createContext<ContextValue>({
   ...initValue,
   setOnboarding: () => {},
@@ -28,7 +30,7 @@ export function Provider(props: React.PropsWithChildren) {
   const [appState, setAppState] = useState<AppState>(initValue);
 
   const loadContext = async () => {
-    const data = await AsyncStorage.getItem("health-stair-beta-3");
+    const data = await AsyncStorage.getItem(STORAGE_NAME);
     if (!data) {
       setAppState((state) => ({
         ...state,
@@ -45,7 +47,7 @@ export function Provider(props: React.PropsWithChildren) {
   };
 
   const setDataInStorage = async (value: any) => {
-    await AsyncStorage.setItem("health-stair", JSON.stringify(value));
+    await AsyncStorage.setItem(STORAGE_NAME, JSON.stringify(value));
   };
 
   const setOnboarding = (data: UserData) => {

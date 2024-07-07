@@ -73,7 +73,7 @@ export const Onboarding = () => {
             align="center"
             styles={{ color: "white" }}
           >
-            স্বাস্থ্যসিঁড়িতে স্বাগতম
+            স্বাস্থ্য সিঁড়িতে স্বাগতম
           </UText>
         </View>
         <KeyboardAvoidingView
