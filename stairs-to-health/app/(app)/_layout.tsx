@@ -17,7 +17,7 @@ export default function TabLayout() {
   useEffect(() => {
     if (loaded) {
       setTimeout(() => {
-        // SplashScreen.hideAsync();
+        SplashScreen.hideAsync();
       }, 3000);
     }
   }, [loaded]);
