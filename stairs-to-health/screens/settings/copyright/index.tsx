@@ -67,18 +67,8 @@ export const Copyright = () => {
           ]}
         >
           <Image
-            style={{ flex: 1, height: hs(60) }}
-            source={require("@/assets/images/settings/copyright/serac.png")}
-            resizeMode="stretch"
-          />
-          <Image
-            style={{ flex: 1, height: hs(60) }}
-            source={require("@/assets/images/settings/copyright/saaf.png")}
-            resizeMode="stretch"
-          />
-          <Image
-            style={{ flex: 1, height: hs(60) }}
-            source={require("@/assets/images/settings/copyright/ippf.png")}
+            style={{ flex: 1, height: 70 }}
+            source={require("@/assets/images/settings/copyright/client.png")}
             resizeMode="stretch"
           />
         </View>
