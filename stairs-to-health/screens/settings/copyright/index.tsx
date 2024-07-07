@@ -67,7 +67,7 @@ export const Copyright = () => {
           ]}
         >
           <Image
-            style={{ flex: 1, height: 70 }}
+            style={{ flex: 1, height: 60 }}
             source={require("@/assets/images/settings/copyright/client.png")}
             resizeMode="stretch"
           />
