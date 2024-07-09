@@ -46,16 +46,14 @@ app.post("/login", (req, res) => {
     username === config.ADMIN_USERNAME &&
     password === config.ADMIN_PASSWORD
   ) {
-    const token = jwt.sign({ username }, config.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign({ username }, config.JWT_SECRET);
     res.cookie("token", token, { httpOnly: true });
     return res.redirect("/home");
   }
 
   res.render("login", {
     title: "Express and EJS",
-    message: `Invalid username or password`,
+    message: `Invalid username or password `,
     error: `Invalid username or password`,
   });
 });
@@ -117,7 +115,6 @@ app.get("/home", async (req, res) => {
   });
 });
 
-// New addUser endpoint
 app.post("/saveUser", async (req, res) => {
   const {
     id,
@@ -199,10 +196,10 @@ app.post("/saveUser", async (req, res) => {
       user: rows[0],
     });
   } catch (error) {
-    console.error("Database error:", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 app.delete("/deleteUser/:id", async (req, res) => {
   const userId = req.params.id;
 

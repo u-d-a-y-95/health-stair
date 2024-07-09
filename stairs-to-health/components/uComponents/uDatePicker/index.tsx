@@ -1,33 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Modal } from "react-native";
 import { UText } from "../uText";
 import { hs, ms } from "@/utils/sizes";
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import { Ionicons } from "@expo/vector-icons";
+import DateTimePicker from "react-native-ui-datepicker";
+import { UButton } from "../uButton";
+import { useAppTheme } from "@/hooks/useAppTheme";
 
 export const UDatePicker = ({ value, onChange: changeHandler, label }) => {
+  const { Colors } = useAppTheme();
+  const [selectedDate, setSelectedDate] = useState(
+    value ? new Date(value) : new Date()
+  );
   const [date, setDate] = useState(value ? new Date(value) : new Date());
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     if (value) {
       const parsedDate = new Date(value);
       if (!isNaN(parsedDate)) {
         setDate(parsedDate);
+        setSelectedDate(parsedDate);
       }
     }
   }, [value]);
 
-  const onChange = (_event, selectedDate) => {
-    changeHandler(selectedDate);
-    setDate(selectedDate);
+  const onChange = (params) => {
+    setDate(params.date);
   };
 
   const showDatepicker = () => {
-    DateTimePickerAndroid.open({
-      value: date,
-      onChange,
-      mode: "date",
-    });
+    setModalVisible(true);
   };
 
   return (
@@ -38,11 +41,49 @@ export const UDatePicker = ({ value, onChange: changeHandler, label }) => {
         </UText>
       )}
       <View style={[styles.dropdown, { marginTop: hs(5) }]}>
-        <UText size="sm">{value ? date.toDateString() : ""}</UText>
+        <UText size="sm">{value ? selectedDate.toDateString() : ""}</UText>
         <TouchableOpacity onPress={showDatepicker}>
           <Ionicons name="calendar-outline" size={ms(22)} />
         </TouchableOpacity>
       </View>
+      <Modal
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <TouchableOpacity
+          style={styles.modalOverlay}
+          onPress={() => setModalVisible(false)}
+        >
+          <View style={[styles.modalContent]}>
+            <DateTimePicker
+              selectedItemColor={Colors.primary}
+              mode="single"
+              date={date}
+              onChange={onChange}
+            />
+            <View style={[styles.footer]}>
+              <UButton
+                size="sm"
+                type="outline"
+                onPress={() => setModalVisible(false)}
+              >
+                Cancel
+              </UButton>
+              <UButton
+                size="sm"
+                onPress={() => {
+                  setSelectedDate(new Date(date));
+                  changeHandler(new Date(date));
+                  setModalVisible(false);
+                }}
+              >
+                Ok
+              </UButton>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 };
@@ -59,6 +100,23 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  modalContent: {
+    width: "90%",
+    backgroundColor: "white",
+    borderRadius: 5,
+    padding: 10,
+  },
+  footer: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    gap: 10,
   },
   selectedValue: {
     fontSize: 16,

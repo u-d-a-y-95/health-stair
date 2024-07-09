@@ -19,19 +19,17 @@
         </div>
       </div>
     </header>
-
     <div class="container">
       <table>
         <thead>
           <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Phone Number</th>
+            <th>Phone</th>
             <th>Gender</th>
-            <th>Date of Birth</th>
+            <th>DOB</th>
             <th>Age</th>
             <th>District</th>
-            <th>Blood Group</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -46,7 +44,6 @@
             <td><%= users[i].date_of_birth %></td>
             <td><%= users[i].age %></td>
             <td><%= users[i].district %></td>
-            <td><%= users[i].blood_group %></td>
             <td>
               <i
                 class="fa fa-trash-o delete"
@@ -56,7 +53,6 @@
             </td>
             <% } else { %>
             <td><%= i + 1 %></td>
-            <td></td>
             <td></td>
             <td></td>
             <td></td>

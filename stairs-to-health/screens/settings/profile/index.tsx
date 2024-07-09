@@ -14,7 +14,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAppContext } from "@/state";
 import * as Application from "expo-application";
-import axios from "axios";
 import { formSchema, formInitValue, saveData } from "./util";
 import { UDatePicker } from "@/components/uComponents/uDatePicker";
 import { useEffect } from "react";
@@ -54,6 +53,7 @@ export const Profile = () => {
       ToastAndroid.show("Data is save successfully!", ToastAndroid.SHORT);
     });
   };
+
   return (
     <SafeScreen styles={[{ paddingHorizontal: 0, flex: 1 }]}>
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
