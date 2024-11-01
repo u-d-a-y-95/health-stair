@@ -6,7 +6,16 @@ import { ClinicDataProps } from "../index.type";
 import { UImageSlider } from "@/components/uComponents/uImageSlider";
 
 export const ClinicDetail = ({ data }: { data: ClinicDataProps }) => {
-  const { details, location, name, district, images, maps, coordinates } = data;
+  const {
+    details,
+    location,
+    name,
+    district,
+    images,
+    maps,
+    coordinates,
+    contact = "",
+  } = data;
 
   const onPressHandler = () => {
     const latitude = coordinates[0];
@@ -48,6 +57,21 @@ export const ClinicDetail = ({ data }: { data: ClinicDataProps }) => {
               styles={[{ textAlign: "justify", marginTop: hs(5) }]}
             >
               {location}
+            </UText>
+          </View>
+          <View style={{ marginTop: ms(15) }}>
+            <UText
+              type="default"
+              weight="900"
+              styles={[{ textAlign: "justify" }]}
+            >
+              যোগাযোগ মাধ্যম
+            </UText>
+            <UText
+              size="sm"
+              styles={[{ textAlign: "justify", marginTop: hs(5) }]}
+            >
+              {contact}
             </UText>
           </View>
 

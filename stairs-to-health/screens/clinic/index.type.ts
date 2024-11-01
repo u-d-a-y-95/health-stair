@@ -11,4 +11,5 @@ export type ClinicDataProps = {
   images: ImageSourcePropType[];
   maps: ImageSourcePropType[];
   coordinates: number[];
+  contact?: string;
 };
