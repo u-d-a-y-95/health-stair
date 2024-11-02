@@ -275,12 +275,12 @@ export const clinics = [
         details:
           "সিটি ডিজিটাল ডায়াগনস্টিক সেন্টার ও হাসপাতাল’, একটি বেসরকারি হাসপাতাল যা নিজস্ব অর্থায়নে পরিচালিত হচ্ছে এবং হাসপাতালটি ১৩ শয্যা বিশিষ্ট । মা ও শিশু স্বাস্থ্যসেবা,প্রজনন স্বাস্থ্যসেবা সহ সকল ধরণের  সেবা প্রদান করে থাকে।।",
         images: [
-          require("@/assets/images/clinics/13-1.jpg"),
-          require("@/assets/images/clinics/13-2.jpg"),
-          require("@/assets/images/clinics/13-3.jpg"),
+          require("@/assets/images/clinics/14-1.jpg"),
+          require("@/assets/images/clinics/14-2.jpg"),
+          require("@/assets/images/clinics/14-3.jpg"),
         ],
-        maps: [require("@/assets/images/clinics/location/13.png")],
-        coordinates: [24.845751886747244, 90.73356611495701],
+        maps: [require("@/assets/images/clinics/location/14.png")],
+        coordinates: [24.877633512817887, 90.73032529369735],
       },
       {
         id: 3,
@@ -298,7 +298,7 @@ export const clinics = [
           require("@/assets/images/clinics/15-2.jpg"),
         ],
         maps: [require("@/assets/images/clinics/location/15.png")],
-        coordinates: [24.88092752369854, 90.73181815671514],
+        coordinates: [24.880928839828144, 90.73186200076995],
       },
       {
         id: 4,
@@ -330,14 +330,14 @@ export const clinics = [
         details:
           "তৃণমূল পর্যায়ে নাগরিক মানসম্পন্ন স্বাস্থ্যসেবা নিশ্চিত করার লক্ষ্যে নেত্রকোণা পৌরসভার আওতায় বাস্তবায়িত এবং পদক্ষেপ মানবিক উন্নয়ন কেন্দ্র কর্তৃক পরিচালিত আরবান প্রাইমারি হেলথ কেয়ার সার্ভিস ডেলিভারি প্রজেক্ট-২য় পর্যায় (ইউপিএইচসিএসডিপি-২) এর অধীনে নিম্নে বর্নিত স্বাস্থ্যসেবা কেন্দ্রসমূহে স্বল্পমূল্যে বিভিন্ন মেডিকেল পরীক্ষাসহ ডাক্তারের পরামর্শ ও চিকিৎসা সেবা প্রদান করা হয়। এছাড়াও গর্ভবতী মা, নারী, শিশু, কিশোর-কিশোরী, আচরণ পরিবর্তন, বিভিন্ন সাধারণ রোগ ও অ্যাম্বুলেন্স সার্ভিস সেবা প্রদান করছে।",
         images: [
-          require("@/assets/images/clinics/18-1.jpg"),
-          require("@/assets/images/clinics/18-2.jpg"),
-          require("@/assets/images/clinics/18-3.jpg"),
-          require("@/assets/images/clinics/18-4.png"),
-          require("@/assets/images/clinics/18-5.png"),
+          require("@/assets/images/clinics/17-1.jpg"),
+          require("@/assets/images/clinics/17-2.jpg"),
+          require("@/assets/images/clinics/17-3.jpg"),
+          require("@/assets/images/clinics/17-4.png"),
+          require("@/assets/images/clinics/17-5.png"),
         ],
-        maps: [require("@/assets/images/clinics/location/18.png")],
-        coordinates: [24.876844138577805, 90.72714042632899],
+        maps: [require("@/assets/images/clinics/location/17.png")],
+        coordinates: [24.876844116696784, 90.727138982209],
       },
       {
         id: 6,
@@ -351,13 +351,13 @@ export const clinics = [
         details:
           "তৃণমূল পর্যায়ে নাগরিক মানসম্পন্ন স্বাস্থ্যসেবা নিশ্চিত করার লক্ষ্যে নেত্রকোণা পৌরসভার আওতায় বাস্তবায়িত এবং পদক্ষেপ মানবিক উন্নয়ন কেন্দ্র কর্তৃক পরিচালিত আরবান প্রাইমারি হেলথ কেয়ার সার্ভিস ডেলিভারি প্রজেক্ট-২য় পর্যায় (ইউপিএইচসিএসডিপি-২) এর অধীনে নিম্নে বর্নিত স্বাস্থ্যসেবা কেন্দ্রসমূহে স্বল্পমূল্যে বিভিন্ন মেডিকেল পরীক্ষাসহ ডাক্তারের পরামর্শ ও চিকিৎসা সেবা প্রদান করা হয়। এছাড়াও গর্ভবতী মা, নারী, শিশু, কিশোর-কিশোরী, আচরণ পরিবর্তন, বিভিন্ন সাধারণ রোগ ও অ্যাম্বুলেন্স সার্ভিস সেবা প্রদান করছে।",
         images: [
-          require("@/assets/images/clinics/17-1.jpg"),
-          require("@/assets/images/clinics/17-2.jpg"),
-          require("@/assets/images/clinics/17-3.jpg"),
-          require("@/assets/images/clinics/17-4.png"),
-          require("@/assets/images/clinics/17-5.png"),
+          require("@/assets/images/clinics/18-1.jpg"),
+          require("@/assets/images/clinics/18-2.jpg"),
+          require("@/assets/images/clinics/18-3.jpg"),
+          require("@/assets/images/clinics/18-4.png"),
+          require("@/assets/images/clinics/18-5.png"),
         ],
-        maps: [require("@/assets/images/clinics/location/16.png")],
+        maps: [require("@/assets/images/clinics/location/18.png")],
         coordinates: [24.898002193620126, 90.7373724871718],
       },
       {
