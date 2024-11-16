@@ -5,6 +5,7 @@ export interface UserData {
   gender?: string;
   date_of_birth?: string;
   district: string;
+  subdistrict: string;
   blood_group?: string;
   deviceId?: string;
   isSync?: boolean;

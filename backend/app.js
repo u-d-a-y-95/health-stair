@@ -121,6 +121,7 @@ app.post("/saveUser", async (req, res) => {
     name,
     phone_number,
     district,
+    subdistrict,
     gender,
     date_of_birth,
     blood_group,
@@ -142,6 +143,7 @@ app.post("/saveUser", async (req, res) => {
       gender || null,
       date_of_birth || null,
       district,
+      subdistrict || null, // Add subdistrict to values
       blood_group || null,
     ];
     let result;
@@ -152,7 +154,7 @@ app.post("/saveUser", async (req, res) => {
       // Update existing user
       query = `
         UPDATE users
-        SET name = ?, phone_number = ?, gender = ?, date_of_birth = ?, district = ?, blood_group = ?
+        SET name = ?, phone_number = ?, gender = ?, date_of_birth = ?, district = ?, subdistrict = ?, blood_group = ?
         WHERE id = ?
       `;
       values.push(id);
@@ -169,7 +171,7 @@ app.post("/saveUser", async (req, res) => {
         // Update existing user
         query = `
           UPDATE users
-          SET name = ?, phone_number = ?, gender = ?, date_of_birth = ?, district = ?, blood_group = ?
+          SET name = ?, phone_number = ?, gender = ?, date_of_birth = ?, district = ?, subdistrict = ?, blood_group = ?
           WHERE id = ?
         `;
         values.push(_id);
@@ -177,8 +179,8 @@ app.post("/saveUser", async (req, res) => {
       } else {
         // Create new user
         query = `
-          INSERT INTO users (name, phone_number, gender, date_of_birth, district, blood_group, deviceId)
-          VALUES (?, ?, ?, ?, ?, ?, ?)
+          INSERT INTO users (name, phone_number, gender, date_of_birth, district, subdistrict, blood_group, deviceId)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         `;
         values.push(deviceId);
         [result] = await pool.query(query, values);
@@ -196,6 +198,7 @@ app.post("/saveUser", async (req, res) => {
       user: rows[0],
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });

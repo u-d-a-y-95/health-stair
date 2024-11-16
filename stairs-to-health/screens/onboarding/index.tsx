@@ -15,13 +15,16 @@ import { useAppTheme } from "@/hooks/useAppTheme";
 import * as Application from "expo-application";
 import axios from "axios";
 import { getPayload } from "@/utils";
+import { useState } from "react";
 export const Onboarding = () => {
+  const [subdistrict, setSubdistrict] = useState([]);
   const { Colors } = useAppTheme();
   const { setOnboarding } = useAppContext();
   const {
     handleSubmit,
     control,
     formState: { errors },
+    setValue,
   } = useForm({
     defaultValues: onboardingFormInitValue,
     resolver: zodResolver(formSchema),
@@ -62,7 +65,7 @@ export const Onboarding = () => {
       >
         <View
           style={{
-            height: SCREEN_HEIGHT > 750 ? "50%" : "40%",
+            height: SCREEN_HEIGHT > 750 ? "40%" : "25%",
             justifyContent: "center",
             alignItems: "center",
           }}
@@ -124,8 +127,30 @@ export const Onboarding = () => {
                   <USelect
                     label="আপনার জেলা নির্বাচন করুন"
                     data={districts}
+                    onChange={(v) => {
+                      setSubdistrict(v.subdistrict);
+                      onChange({
+                        label: v.label,
+                        value: v.value,
+                      });
+                      setValue("subdistrict", "");
+                    }}
+                    value={value}
+                  />
+                </>
+              )}
+            />
+            <Controller
+              name="subdistrict"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <USelect
+                    label="আপনার উপজেলা নির্বাচন করুন"
+                    data={subdistrict}
                     onChange={onChange}
                     value={value}
+                    disable={subdistrict.length == 0}
                   />
                 </>
               )}

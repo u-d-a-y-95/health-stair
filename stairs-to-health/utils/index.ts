@@ -96,6 +96,9 @@ export const getPayload = (values: UserData) => {
     ...values,
     district: (values.district as unknown as { label: string; value: string })
       .value,
+    subdistrict: (
+      values.subdistrict as unknown as { label: string; value: string }
+    ).value,
     ...(values.gender && { gender: values.gender.value }),
   };
 };

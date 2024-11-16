@@ -4,6 +4,7 @@ export const onboardingFormInitValue = {
   name: "",
   phone_number: "",
   district: "",
+  subdistrict: "",
 };
 
 export const formSchema = z.object({
@@ -16,6 +17,10 @@ export const formSchema = z.object({
       "অনুগ্রহ করে সঠিক মোবাইল নম্বর প্রদান করুন।"
     ),
   district: z.object({
+    value: z.string().min(1, "অনুগ্রহ করে জেলা নির্বাচন করুন"),
+    label: z.string().min(1, "অনুগ্রহ করে জেলা নির্বাচন করুন"),
+  }),
+  subdistrict: z.object({
     value: z.string().min(1, "অনুগ্রহ করে জেলা নির্বাচন করুন"),
     label: z.string().min(1, "অনুগ্রহ করে জেলা নির্বাচন করুন"),
   }),

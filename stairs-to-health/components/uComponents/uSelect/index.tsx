@@ -18,9 +18,16 @@ type USelectProps = {
   label: string;
   value: Item;
   onChange: (item: Item) => void;
+  disable?: boolean;
 };
 
-export const USelect = ({ data, onChange, label, value }: USelectProps) => {
+export const USelect = ({
+  data,
+  onChange,
+  label,
+  value,
+  disable = false,
+}: USelectProps) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleSelect = (item: Item) => {
@@ -36,8 +43,15 @@ export const USelect = ({ data, onChange, label, value }: USelectProps) => {
         </UText>
       )}
       <TouchableOpacity
-        style={[styles.dropdown, { marginTop: hs(5) }]}
-        onPress={() => setModalVisible(true)}
+        style={[
+          styles.dropdown,
+          { marginTop: hs(5) },
+          ...(disable ? [{ backgroundColor: "lightgray" }] : []),
+        ]}
+        onPress={() => {
+          if (disable) return;
+          setModalVisible(true);
+        }}
       >
         <UText size="sm">{value ? value.label : "অপশন নির্বাচন করুন"}</UText>
       </TouchableOpacity>

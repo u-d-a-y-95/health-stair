@@ -30,6 +30,7 @@
             <th>DOB</th>
             <th>Age</th>
             <th>District</th>
+            <th>Subdistrict</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -37,14 +38,15 @@
           <% for (let i = 0; i < 10; i++) { %>
           <tr>
             <% if (users[i]) { %>
-            <td><%= i + 1 %></td>
-            <td><%= users[i].name %></td>
-            <td><%= users[i].phone_number %></td>
-            <td><%= users[i].gender %></td>
-            <td><%= users[i].date_of_birth %></td>
-            <td><%= users[i].age %></td>
-            <td><%= users[i].district %></td>
-            <td>
+            <td data-label="#"><%= i + 1 %></td>
+            <td data-label="Name"><%= users[i].name %></td>
+            <td data-label="Phone"><%= users[i].phone_number %></td>
+            <td data-label="Gender"><%= users[i].gender %></td>
+            <td data-label="DOB"><%= users[i].date_of_birth %></td>
+            <td data-label="Age"><%= users[i].age %></td>
+            <td data-label="District"><%= users[i].district %></td>
+            <td data-label="Subdistrict"><%= users[i].subdistrict %></td>
+            <td data-label="Action">
               <i
                 class="fa fa-trash-o delete"
                 style="color: red; cursor: pointer"
@@ -52,14 +54,15 @@
               ></i>
             </td>
             <% } else { %>
-            <td><%= i + 1 %></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td data-label="#"><%= i + 1 %></td>
+            <td data-label="Name"></td>
+            <td data-label="Phone"></td>
+            <td data-label="Gender"></td>
+            <td data-label="DOB"></td>
+            <td data-label="Age"></td>
+            <td data-label="District"></td>
+            <td data-label="Subdistrict"></td>
+            <td data-label="Action"></td>
             <% } %>
           </tr>
           <% } %>
