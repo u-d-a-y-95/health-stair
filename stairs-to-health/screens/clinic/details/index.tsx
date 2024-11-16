@@ -20,7 +20,7 @@ export const ClinicDetail = ({ data }: { data: ClinicDataProps }) => {
   const onPressHandler = () => {
     const latitude = coordinates[0];
     const longitude = coordinates[1];
-    Linking.openURL(`geo:0,0?q=${latitude},${longitude}`);
+    Linking.openURL(`geo:0,0?q=${latitude},${longitude}(${name})`);
   };
 
   return (

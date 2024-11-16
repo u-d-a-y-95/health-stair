@@ -1,5 +1,5 @@
 import { UText } from "@/components/uComponents/uText";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { ListComponentProps } from "./index.type";
 import { hs, ws } from "@/utils/sizes";
 import { useAppTheme } from "@/hooks/useAppTheme";
@@ -34,7 +34,7 @@ const List = ({ items, layer = 1 }: { items: ListComponentProps[] }) => {
             />
             <View style={{ flex: 1 }}>
               <UText
-                align="justify"
+                align={item?.align ? item?.align : "justify"}
                 size="sm"
                 styles={{ flex: 1 }}
                 weight={item?.isTitleBold ? "600" : ""}

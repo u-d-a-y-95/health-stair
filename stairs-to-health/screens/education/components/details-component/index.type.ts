@@ -10,6 +10,7 @@ export type ImageComponentProps = {
   url: ImageSourcePropType;
 };
 export type ListComponentProps = {
+  align?: "left" | "right" | "center" | "justify";
   title?: string;
   subtitle?: string;
   children: ListComponentProps[];

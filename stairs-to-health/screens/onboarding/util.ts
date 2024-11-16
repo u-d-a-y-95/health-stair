@@ -21,7 +21,7 @@ export const formSchema = z.object({
     label: z.string().min(1, "অনুগ্রহ করে জেলা নির্বাচন করুন"),
   }),
   subdistrict: z.object({
-    value: z.string().min(1, "অনুগ্রহ করে জেলা নির্বাচন করুন"),
-    label: z.string().min(1, "অনুগ্রহ করে জেলা নির্বাচন করুন"),
+    value: z.string().min(1, "অনুগ্রহ করে উপজেলা নির্বাচন করুন"),
+    label: z.string().min(1, "অনুগ্রহ করে উপজেলা নির্বাচন করুন"),
   }),
 });

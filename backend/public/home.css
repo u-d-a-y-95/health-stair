@@ -109,3 +109,32 @@ td:nth-child(1) {
   background: #fdeded;
   border-radius: 2px;
 }
+
+/* Hide on desktop */
+.mobile {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  /* Show on mobile */
+  .mobile {
+    display: block;
+  }
+}
+
+/* Hide on mobile */
+.desktop {
+  display: none;
+}
+
+@media only screen and (min-width: 769px) {
+  /* Show on desktop */
+  .desktop {
+    display: block;
+  }
+}
+
+.mobile td {
+  text-align: left;
+  padding: 10px;
+}

@@ -20,54 +20,97 @@
       </div>
     </header>
     <div class="container">
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Gender</th>
-            <th>DOB</th>
-            <th>Age</th>
-            <th>District</th>
-            <th>Subdistrict</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% for (let i = 0; i < 10; i++) { %>
-          <tr>
-            <% if (users[i]) { %>
-            <td data-label="#"><%= i + 1 %></td>
-            <td data-label="Name"><%= users[i].name %></td>
-            <td data-label="Phone"><%= users[i].phone_number %></td>
-            <td data-label="Gender"><%= users[i].gender %></td>
-            <td data-label="DOB"><%= users[i].date_of_birth %></td>
-            <td data-label="Age"><%= users[i].age %></td>
-            <td data-label="District"><%= users[i].district %></td>
-            <td data-label="Subdistrict"><%= users[i].subdistrict %></td>
-            <td data-label="Action">
-              <i
-                class="fa fa-trash-o delete"
-                style="color: red; cursor: pointer"
-                onclick="deleteUser('<%= users[i].id %>')"
-              ></i>
-            </td>
-            <% } else { %>
-            <td data-label="#"><%= i + 1 %></td>
-            <td data-label="Name"></td>
-            <td data-label="Phone"></td>
-            <td data-label="Gender"></td>
-            <td data-label="DOB"></td>
-            <td data-label="Age"></td>
-            <td data-label="District"></td>
-            <td data-label="Subdistrict"></td>
-            <td data-label="Action"></td>
+      <div class="desktop">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Gender</th>
+              <th>DOB</th>
+              <th>Age</th>
+              <th>District</th>
+              <th>Subdistrict</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let i = 0; i < 10; i++) { %>
+            <tr>
+              <% if (users[i]) { %>
+              <td data-label="#"><%= i + 1 %></td>
+              <td data-label="Name"><%= users[i].name %></td>
+              <td data-label="Phone"><%= users[i].phone_number %></td>
+              <td data-label="Gender"><%= users[i].gender %></td>
+              <td data-label="DOB"><%= users[i].date_of_birth %></td>
+              <td data-label="Age"><%= users[i].age %></td>
+              <td data-label="District"><%= users[i].district %></td>
+              <td data-label="Subdistrict"><%= users[i].subdistrict %></td>
+              <td data-label="Action">
+                <i
+                  class="fa fa-trash-o delete"
+                  style="color: red; cursor: pointer"
+                  onclick="deleteUser('<%= users[i].id %>')"
+                ></i>
+              </td>
+              <% } else { %>
+              <td data-label="#"><%= i + 1 %></td>
+              <td data-label="Name"></td>
+              <td data-label="Phone"></td>
+              <td data-label="Gender"></td>
+              <td data-label="DOB"></td>
+              <td data-label="Age"></td>
+              <td data-label="District"></td>
+              <td data-label="Subdistrict"></td>
+              <td data-label="Action"></td>
+              <% } %>
+            </tr>
             <% } %>
-          </tr>
-          <% } %>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mobile">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>User Information</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (let i = 0; i < 10; i++) { %>
+            <tr>
+              <% if (users[i]) { %>
+              <td data-label="#"><%= i + 1 %></td>
+              <td data-label="User Information">
+                Name: <%= users[i].name %><br />
+                Phone: <%= users[i].phone || 'N/A' %><br />
+                Gender: <%= users[i].gender %><br />
+                DOB: <%= users[i].date_of_birth %><br />
+                Age: <%= users[i].age %><br />
+                District: <%= users[i].district %><br />
+                Subdistrict: <%= users[i].subdistrict %>
+              </td>
+              <td data-label="Action">
+                <i
+                  class="fa fa-trash-o delete"
+                  style="color: red; cursor: pointer"
+                  onclick="deleteUser('<%= users[i].id %>')"
+                ></i>
+              </td>
+              <% } else { %>
+              <td data-label="#"><%= i + 1 %></td>
+              <td data-label="User Information">No data available</td>
+              <td data-label="Action"></td>
+              <% } %>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
 
       <div class="pagination">
         <% if (currentPage > 1) { %>

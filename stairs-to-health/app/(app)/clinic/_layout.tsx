@@ -7,7 +7,7 @@ export default function ClinicLayout() {
     <Stack>
       <Stack.Screen
         name="index"
-        options={{ ...getStackScreenOption("স্বাস্থ্য কেন্দ্র") }}
+        options={{ ...getStackScreenOption("স্বাস্থ্যকেন্দ্র") }}
       />
       <Stack.Screen
         name="clinicCenterList/[id]"

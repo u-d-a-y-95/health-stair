@@ -59,7 +59,7 @@ export const Copyright = () => {
         <View
           style={[
             {
-              marginTop: hs(20),
+              marginVertical: hs(20),
               flexDirection: "row",
               alignItems: "center",
               gap: ws(20),
@@ -67,7 +67,7 @@ export const Copyright = () => {
           ]}
         >
           <Image
-            style={{ flex: 1, height: 60 }}
+            style={{ flex: 1, height: 50 }}
             source={require("@/assets/images/settings/copyright/client.png")}
             resizeMode="stretch"
           />

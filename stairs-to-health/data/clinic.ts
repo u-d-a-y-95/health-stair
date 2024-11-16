@@ -97,7 +97,7 @@ export const clinics = [
           require("@/assets/images/clinics/5-3.jpg"),
         ],
         maps: [require("@/assets/images/clinics/location/5.png")],
-        coordinates: [24.7435701, 90.4075075],
+        coordinates: [24.7435473, 90.4074874],
       },
       {
         id: 6,
@@ -153,7 +153,7 @@ export const clinics = [
           require("@/assets/images/clinics/8-3.jpg"),
         ],
         maps: [require("@/assets/images/clinics/location/8.png")],
-        coordinates: [24.7457158371085, 90.40824564230516],
+        coordinates: [24.745688338439273, 90.40827551095163],
       },
       {
         id: 9,

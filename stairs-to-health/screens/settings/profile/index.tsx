@@ -16,15 +16,17 @@ import { useAppContext } from "@/state";
 import * as Application from "expo-application";
 import { formSchema, formInitValue, saveData } from "./util";
 import { UDatePicker } from "@/components/uComponents/uDatePicker";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getPayload } from "@/utils";
 
 export const Profile = () => {
+  const [subdistrict, setSubdistrict] = useState([]);
   const { setOnboarding, data } = useAppContext();
   const {
     reset,
     handleSubmit,
     control,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: formInitValue,
@@ -33,10 +35,15 @@ export const Profile = () => {
   });
 
   useEffect(() => {
+    const district =
+      districts.find((item) => item.value === data.district) || "";
     reset(
       {
         ...data,
-        district: districts.find((item) => item.value === data.district) || "",
+        district: district,
+        subdistrict: district
+          ? district.subdistrict.find((item) => item.value === data.subdistrict)
+          : "",
         gender: genders.find((item) => item.value === data.gender) || "",
         date_of_birth: data.date_of_birth || "",
       },
@@ -116,8 +123,30 @@ export const Profile = () => {
                   <USelect
                     label="জেলা"
                     data={districts}
+                    onChange={(v) => {
+                      setSubdistrict(v.subdistrict);
+                      onChange({
+                        label: v.label,
+                        value: v.value,
+                      });
+                      setValue("subdistrict", "");
+                    }}
+                    value={value}
+                  />
+                </>
+              )}
+            />
+            <Controller
+              name="subdistrict"
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <USelect
+                    label="আপনার উপজেলা নির্বাচন করুন"
+                    data={subdistrict}
                     onChange={onChange}
                     value={value}
+                    // disable={subdistrict.length == 0}
                   />
                 </>
               )}

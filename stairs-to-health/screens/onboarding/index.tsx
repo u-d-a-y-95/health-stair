@@ -150,7 +150,6 @@ export const Onboarding = () => {
                     data={subdistrict}
                     onChange={onChange}
                     value={value}
-                    disable={subdistrict.length == 0}
                   />
                 </>
               )}
