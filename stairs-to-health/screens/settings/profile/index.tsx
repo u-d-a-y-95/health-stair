@@ -27,6 +27,7 @@ export const Profile = () => {
     handleSubmit,
     control,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm({
     defaultValues: formInitValue,
@@ -146,7 +147,7 @@ export const Profile = () => {
                     data={subdistrict}
                     onChange={onChange}
                     value={value}
-                    // disable={subdistrict.length == 0}
+                    disable={!getValues("district")}
                   />
                 </>
               )}

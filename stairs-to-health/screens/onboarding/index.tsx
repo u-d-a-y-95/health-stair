@@ -25,6 +25,7 @@ export const Onboarding = () => {
     control,
     formState: { errors },
     setValue,
+    getValues,
   } = useForm({
     defaultValues: onboardingFormInitValue,
     resolver: zodResolver(formSchema),
@@ -150,6 +151,7 @@ export const Onboarding = () => {
                     data={subdistrict}
                     onChange={onChange}
                     value={value}
+                    disable={!getValues("district")}
                   />
                 </>
               )}
