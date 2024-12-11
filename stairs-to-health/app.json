@@ -20,7 +20,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#135178"
       },
-      "package": "com.uday.healthstairs"
+      "package": "com.serac.healthstairs"
     },
     "web": {
       "bundler": "metro",
