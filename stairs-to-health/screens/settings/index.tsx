@@ -35,14 +35,10 @@ export const Settings = () => {
           borderTopStartRadius: 20,
           borderTopEndRadius: 20,
           height: "50%",
-          justifyContent: "center",
+          paddingTop: 20,
+          // justifyContent: "center",
         }}
       >
-        <SettingsListItem
-          title="প্রোফাইল"
-          url="/settings/profile"
-          onPress={navigate}
-        />
         <SettingsListItem
           title="কপি রাইট"
           url="/settings/copyright"

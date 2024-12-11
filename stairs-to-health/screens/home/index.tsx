@@ -13,8 +13,6 @@ import { EmergencyCard } from "./components/emergencyCard";
 import { router } from "expo-router";
 
 export const Home = () => {
-  const { data } = useAppContext();
-
   return (
     <SafeScreen
       styles={{
@@ -24,21 +22,21 @@ export const Home = () => {
       }}
     >
       <ScrollView showsVerticalScrollIndicator={false}>
-        {(data?.name || data?.phone_number) && (
-          <View
-            style={{
-              marginHorizontal: ws(10),
-              backgroundColor: "#e9f4fc",
-              padding: ms(10),
-              paddingVertical: 30,
-            }}
-          >
-            <UText size="xl" weight="900" type="primary">
-              {data?.name?.trim()}
-            </UText>
-            <UText size="sm">{data?.phone_number.trim()}</UText>
-          </View>
-        )}
+        <View
+          style={{
+            marginHorizontal: ws(10),
+            backgroundColor: "#e9f4fc",
+            padding: ms(10),
+            paddingVertical: 30,
+          }}
+        >
+          <UText size="xl" weight="900" type="primary" align="justify">
+            স্বাগতম
+          </UText>
+          <UText size="sm" weight="900" type="primary" align="justify">
+            প্রজনন স্বাস্থ্য সম্পর্কে সঠিক তথ্য জানুন ও সুরক্ষিত থাকুন
+          </UText>
+        </View>
 
         <View style={{ marginTop: hs(20) }}>
           <View

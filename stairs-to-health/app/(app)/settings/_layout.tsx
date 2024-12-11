@@ -20,12 +20,6 @@ export default function SettingsRootLayout() {
           ...getStackScreenOption("কপি রাইট", true),
         }}
       />
-      <Stack.Screen
-        name="profile"
-        options={{
-          ...getStackScreenOption("প্রোফাইল", true),
-        }}
-      />
     </Stack>
   );
 }
