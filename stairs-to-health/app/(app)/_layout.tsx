@@ -1,4 +1,4 @@
-import { Redirect, SplashScreen, Tabs } from "expo-router";
+import { SplashScreen, Tabs } from "expo-router";
 import React, { useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { ms } from "@/utils/sizes";
@@ -7,9 +7,10 @@ import { useAppContext } from "@/state";
 import { useAppTheme } from "@/hooks/useAppTheme";
 
 SplashScreen.preventAutoHideAsync();
+
 export default function TabLayout() {
   const { Colors } = useAppTheme();
-  const { isloading, isOnBoarded, data, setOnboarding } = useAppContext();
+  const { isloading } = useAppContext();
   const [loaded] = useFonts({
     SpaceMono: require("../../assets/fonts/SpaceMono-Regular.ttf"),
   });
@@ -25,19 +26,6 @@ export default function TabLayout() {
   if (!loaded || isloading) {
     return null;
   }
-
-  if (loaded && !isOnBoarded) return <Redirect href="/onboarding" />;
-
-  // useEffect(() => {
-  //   const unsubscribe = NetInfo.addEventListener((state) => {
-  //     if (state.isConnected && !loaded && isOnBoarded) {
-  //       if (!data.isSync) {
-  //         saveData(data, setOnboarding, () => {});
-  //       }
-  //     }
-  //   });
-  //   return () => unsubscribe();
-  // }, []);
 
   return (
     <Tabs

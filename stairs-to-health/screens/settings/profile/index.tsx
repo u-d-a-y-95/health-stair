@@ -21,7 +21,7 @@ import { getPayload } from "@/utils";
 
 export const Profile = () => {
   const [subdistrict, setSubdistrict] = useState([]);
-  const { setOnboarding, data } = useAppContext();
+  const { data, updateAppData } = useAppContext();
   const {
     reset,
     handleSubmit,
@@ -57,7 +57,7 @@ export const Profile = () => {
       ...getPayload(values),
       deviceId: Application.getAndroidId(),
     };
-    await saveData(payload, setOnboarding, () => {
+    await saveData(payload, updateAppData, () => {
       ToastAndroid.show("Data is save successfully!", ToastAndroid.SHORT);
     });
   };

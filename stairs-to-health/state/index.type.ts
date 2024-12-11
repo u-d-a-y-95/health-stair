@@ -13,11 +13,9 @@ export interface UserData {
 
 export interface AppState {
   isloading: boolean;
-  isOnBoarded: boolean;
   data: UserData;
 }
 
 export interface ContextValue extends AppState {
-  setOnboarding: (data: UserData) => void;
-  setSync: (value: boolean) => void;
+  updateAppData: (data: UserData) => void;
 }

@@ -11,11 +11,10 @@ import { EmergencyContent } from "@/data/emergency";
 import { EducationCard } from "./components/educationCard";
 import { EmergencyCard } from "./components/emergencyCard";
 import { router } from "expo-router";
-import { UButton } from "@/components/uComponents/uButton";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const Home = () => {
   const { data } = useAppContext();
+  console.log(data);
 
   return (
     <SafeScreen
@@ -35,9 +34,9 @@ export const Home = () => {
           }}
         >
           <UText size="xl" weight="900" type="primary">
-            {data?.name?.trim()}
+            {data?.name?.trim() || "Mr/Mrs."}
           </UText>
-          <UText size="sm">{data.phone_number.trim()}</UText>
+          <UText size="sm">{data?.phone_number.trim()}</UText>
         </View>
         <View style={{ marginTop: hs(20) }}>
           <View

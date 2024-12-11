@@ -4,7 +4,6 @@ import { AppState, ContextValue, UserData } from "./index.type";
 
 const initValue = {
   isloading: true,
-  isOnBoarded: false,
   data: {
     id: "",
     name: "",
@@ -12,18 +11,18 @@ const initValue = {
     gender: "",
     date_of_birth: "",
     district: "",
+    subdistrict: "",
     blood_group: "",
     deviceId: "",
     isSync: false,
   },
 };
 
-const STORAGE_NAME = "health-stair-beta-3";
+const STORAGE_NAME = "health-stair-beta-4";
 
 const context = createContext<ContextValue>({
   ...initValue,
-  setOnboarding: () => {},
-  setSync: () => {},
+  updateAppData: () => {},
 });
 
 export function Provider(props: React.PropsWithChildren) {
@@ -31,34 +30,16 @@ export function Provider(props: React.PropsWithChildren) {
 
   const loadContext = async () => {
     const data = await AsyncStorage.getItem(STORAGE_NAME);
-    if (!data) {
-      setAppState((state) => ({
-        ...state,
-        isloading: false,
-        isOnBoarded: false,
-      }));
-    } else {
-      const parsed = JSON.parse(data);
-      setAppState({
-        ...parsed,
-        isloading: false,
-      });
-    }
+    setAppState((state) => ({
+      data: data ? JSON.parse(data).data : state.data,
+      isloading: false,
+    }));
   };
 
   const setDataInStorage = async (value: any) => {
     await AsyncStorage.setItem(STORAGE_NAME, JSON.stringify(value));
   };
 
-  const setOnboarding = (data: UserData) => {
-    setAppState((state) => ({
-      ...state,
-      isOnBoarded: true,
-      data: {
-        ...data,
-      },
-    }));
-  };
   const setSync = (value: boolean) => {
     setAppState((state) => ({
       ...state,
@@ -78,8 +59,15 @@ export function Provider(props: React.PropsWithChildren) {
     setDataInStorage(appState);
   }, [appState]);
 
+  const updateAppData = (data: UserData) => {
+    setAppState((state) => ({
+      ...state,
+      data,
+    }));
+  };
+
   return (
-    <context.Provider value={{ ...appState, setOnboarding, setSync }}>
+    <context.Provider value={{ ...appState, updateAppData }}>
       {props.children}
     </context.Provider>
   );
