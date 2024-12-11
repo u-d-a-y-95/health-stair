@@ -18,7 +18,7 @@ const initValue = {
   },
 };
 
-const STORAGE_NAME = "health-stair-beta-4";
+const STORAGE_NAME = "health-stair-beta-6";
 
 const context = createContext<ContextValue>({
   ...initValue,

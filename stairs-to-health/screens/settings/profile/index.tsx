@@ -37,14 +37,14 @@ export const Profile = () => {
 
   useEffect(() => {
     const district =
-      districts.find((item) => item.value === data.district) || "";
+      districts.find((item) => item.value === data.district) || null;
     reset(
       {
         ...data,
         district: district,
         subdistrict: district
           ? district.subdistrict.find((item) => item.value === data.subdistrict)
-          : "",
+          : null,
         gender: genders.find((item) => item.value === data.gender) || "",
         date_of_birth: data.date_of_birth || "",
       },
@@ -130,7 +130,7 @@ export const Profile = () => {
                         label: v.label,
                         value: v.value,
                       });
-                      setValue("subdistrict", "");
+                      setValue("subdistrict", null);
                     }}
                     value={value}
                   />

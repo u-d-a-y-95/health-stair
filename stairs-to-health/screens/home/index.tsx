@@ -14,7 +14,6 @@ import { router } from "expo-router";
 
 export const Home = () => {
   const { data } = useAppContext();
-  console.log(data);
 
   return (
     <SafeScreen
@@ -25,19 +24,22 @@ export const Home = () => {
       }}
     >
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View
-          style={{
-            marginHorizontal: ws(10),
-            backgroundColor: "#e9f4fc",
-            padding: ms(10),
-            paddingVertical: 30,
-          }}
-        >
-          <UText size="xl" weight="900" type="primary">
-            {data?.name?.trim() || "Mr/Mrs."}
-          </UText>
-          <UText size="sm">{data?.phone_number.trim()}</UText>
-        </View>
+        {(data?.name || data?.phone_number) && (
+          <View
+            style={{
+              marginHorizontal: ws(10),
+              backgroundColor: "#e9f4fc",
+              padding: ms(10),
+              paddingVertical: 30,
+            }}
+          >
+            <UText size="xl" weight="900" type="primary">
+              {data?.name?.trim()}
+            </UText>
+            <UText size="sm">{data?.phone_number.trim()}</UText>
+          </View>
+        )}
+
         <View style={{ marginTop: hs(20) }}>
           <View
             style={{

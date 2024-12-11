@@ -94,11 +94,8 @@ export const getComponent = (type: string) => {
 export const getPayload = (values: UserData) => {
   return {
     ...values,
-    district: (values.district as unknown as { label: string; value: string })
-      .value,
-    subdistrict: (
-      values.subdistrict as unknown as { label: string; value: string }
-    ).value,
-    ...(values.gender && { gender: values.gender.value }),
+    district: values.district ? values.district.value : "",
+    subdistrict: values.subdistrict ? values.subdistrict.value : "",
+    gender: values.gender ? values.gender.value : "",
   };
 };
