@@ -6,7 +6,7 @@ const initValue = {
   isloading: true,
 };
 
-const STORAGE_NAME = "health-stair-beta-6";
+const STORAGE_NAME = "health-stair-app";
 
 const context = createContext<ContextValue>({
   ...initValue,
