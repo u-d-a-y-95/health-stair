@@ -3,14 +3,12 @@ import React, { useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { ms } from "@/utils/sizes";
 import { useFonts } from "expo-font";
-import { useAppContext } from "@/state";
 import { useAppTheme } from "@/hooks/useAppTheme";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function TabLayout() {
   const { Colors } = useAppTheme();
-  const { isloading } = useAppContext();
   const [loaded] = useFonts({
     SpaceMono: require("../../assets/fonts/SpaceMono-Regular.ttf"),
   });
@@ -23,7 +21,7 @@ export default function TabLayout() {
     }
   }, [loaded]);
 
-  if (!loaded || isloading) {
+  if (!loaded) {
     return null;
   }
 

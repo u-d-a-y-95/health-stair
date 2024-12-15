@@ -2,7 +2,6 @@ import { SafeScreen } from "@/components/safeScreen";
 import { USpace } from "@/components/uComponents/uSpace";
 import { UText } from "@/components/uComponents/uText";
 import { educationList } from "@/data/education";
-import { useAppContext } from "@/state";
 import { shuffleArray } from "@/utils";
 import { hs, ms, ws } from "@/utils/sizes";
 import { FlashList } from "@shopify/flash-list";
