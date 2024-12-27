@@ -13,7 +13,8 @@ export type TopicListProps = {
   title: string;
   url: string;
   subtitle: string;
-  expanded: number;
+  expanded: number | null;
+  details?: any;
   onExpanded: (id: number) => void;
 };
 

@@ -7,10 +7,10 @@ import { EmergencyContent } from "@/data/emergency";
 import { TopicListItem } from "../education/components/topicListItem";
 
 export const Emergency = () => {
-  const [expanded, setExpanded] = useState(null);
+  const [expanded, setExpanded] = useState<number | null>(null);
   const { subcategories } = EmergencyContent;
 
-  const expandedHandler = (id: any) => {
+  const expandedHandler = (id: number) => {
     setExpanded((value) => {
       if (value === id) return null;
       return id;

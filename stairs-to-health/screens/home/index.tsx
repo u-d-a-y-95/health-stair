@@ -5,7 +5,7 @@ import { educationList } from "@/data/education";
 import { shuffleArray } from "@/utils";
 import { hs, ms, ws } from "@/utils/sizes";
 import { FlashList } from "@shopify/flash-list";
-import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { Image, Pressable, ScrollView, View } from "react-native";
 import { EmergencyContent } from "@/data/emergency";
 import { EducationCard } from "./components/educationCard";
 import { EmergencyCard } from "./components/emergencyCard";
@@ -105,30 +105,7 @@ export const Home = () => {
         >
           <EmergencyCard {...EmergencyContent} />
         </View>
-
-        {/* <UButton
-          onPress={async () => {
-            await AsyncStorage.clear();
-          }}
-        >
-          Clear
-        </UButton> */}
       </ScrollView>
     </SafeScreen>
   );
 };
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: ws(16),
-    gap: ws(16),
-  },
-  profile: {
-    width: ws(80),
-    height: ws(80),
-    backgroundColor: "gray",
-    borderRadius: 9999,
-  },
-});

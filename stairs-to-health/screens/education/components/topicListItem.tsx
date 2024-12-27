@@ -27,7 +27,7 @@ export const TopicListItem = ({
   const height = useSharedValue(0);
   const [contentHeight, setContentHeight] = useState(0);
 
-  const onLayout = (event) => {
+  const onLayout = (event: any) => {
     const onLayoutHeight = event.nativeEvent.layout.height;
     if (onLayoutHeight > 0 && height !== onLayoutHeight) {
       setContentHeight(onLayoutHeight);

@@ -1,10 +1,9 @@
 import { FlashList } from "@shopify/flash-list";
 import { ClinicListItem } from "./components/clinicListItem";
 import { USpace } from "@/components/uComponents/uSpace";
-import { clinics } from "@/data/clinic";
 import { SafeScreen } from "@/components/safeScreen";
 import { View } from "react-native";
-import { ms, ws } from "@/utils/sizes";
+import { ms } from "@/utils/sizes";
 import { ClinicDataProps } from "./index.type";
 
 export const ClinicList = ({

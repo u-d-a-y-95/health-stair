@@ -1,8 +1,7 @@
 import { SafeScreen } from "@/components/safeScreen";
-import { UImageSlider } from "@/components/uComponents/uImageSlider";
 import { UText } from "@/components/uComponents/uText";
 import { workCenters } from "@/data/settings";
-import { SCREEN_HEIGHT, hs, ms, ws } from "@/utils/sizes";
+import { hs, ms, ws } from "@/utils/sizes";
 import { ScrollView, View } from "react-native";
 
 export const AboutUs = () => {

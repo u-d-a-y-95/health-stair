@@ -36,7 +36,6 @@ export const Clinic = () => {
                 justifyContent: "center",
                 alignItems: "center",
               }}
-              // source={require("@/assets/images/react-logo.png")}
             >
               <UText size="lg" weight="600">
                 {item.title}

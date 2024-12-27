@@ -6,7 +6,7 @@ import { UButton } from "@/components/uComponents/uButton";
 import { USpace } from "@/components/uComponents/uSpace";
 import { SafeScreen } from "@/components/safeScreen";
 import { educationList } from "@/data/education";
-import { hs, ws } from "@/utils/sizes";
+import { ws } from "@/utils/sizes";
 
 export const Subcategory = ({ id }: { id: number }) => {
   const [expanded, setExpanded] = useState(null);
