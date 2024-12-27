@@ -381,6 +381,7 @@
 
             if (response.ok) {
               alert(result.message || "User saved successfully!");
+              document.getElementById("surveyForm").reset();
             } else {
               alert(result.error || "An error occurred. Please try again.");
             }
