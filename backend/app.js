@@ -22,17 +22,7 @@ const dbConfig = {
 
 const pool = mysql.createPool(dbConfig);
 
-app.get("/", (req, res) => {
-  const token = req.cookies.token;
-  if (!token) return res.redirect("/login");
-
-  jwt.verify(token, config.JWT_SECRET, (err, decoded) => {
-    if (err) return res.redirect("/login");
-    return res.redirect("/home");
-  });
-});
-
-app.get("/login", (req, res) => {
+app.get("/admin/login", (req, res) => {
   res.render("login", {
     title: "Express and EJS",
     message: "Welcome to Express and EJS!",
@@ -40,7 +30,7 @@ app.get("/login", (req, res) => {
   });
 });
 
-app.post("/login", (req, res) => {
+app.post("/admin/login", (req, res) => {
   const { username, password } = req.body;
   if (
     username === config.ADMIN_USERNAME &&
@@ -48,7 +38,7 @@ app.post("/login", (req, res) => {
   ) {
     const token = jwt.sign({ username }, config.JWT_SECRET);
     res.cookie("token", token, { httpOnly: true });
-    return res.redirect("/home");
+    return res.redirect("/admin");
   }
 
   res.render("login", {
@@ -73,12 +63,12 @@ const Gender = {
   None: "বলতে আগ্রহী নন",
 };
 
-app.get("/home", async (req, res) => {
+app.get("/admin", async (req, res) => {
   const token = req.cookies.token;
-  if (!token) return res.redirect("/login");
+  if (!token) return res.redirect("/admin/login");
 
   jwt.verify(token, config.JWT_SECRET, async (err, decoded) => {
-    if (err) return res.redirect("/login");
+    if (err) return res.redirect("/admin/login");
 
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
@@ -103,7 +93,7 @@ app.get("/home", async (req, res) => {
 
       const [[total]] = await pool.query("SELECT COUNT(*) as count FROM users");
 
-      res.render("home", {
+      res.render("admin", {
         users,
         currentPage: page,
         totalPages: Math.ceil(total.count / limit),
@@ -125,11 +115,10 @@ app.post("/saveUser", async (req, res) => {
     gender,
     date_of_birth,
     blood_group,
-    deviceId,
   } = req.body;
 
   // Ensure required fields are present
-  if (!name || !phone_number || !district || !deviceId) {
+  if (!name || !phone_number || !district) {
     return res.status(400).json({
       error: "Name, phone number, district, and device ID are required",
     });
@@ -144,7 +133,6 @@ app.post("/saveUser", async (req, res) => {
       date_of_birth || null,
       district,
       subdistrict || null, // Add subdistrict to values
-      blood_group || null,
     ];
     let result;
 
@@ -154,7 +142,7 @@ app.post("/saveUser", async (req, res) => {
       // Update existing user
       query = `
         UPDATE users
-        SET name = ?, phone_number = ?, gender = ?, date_of_birth = ?, district = ?, subdistrict = ?, blood_group = ?
+        SET name = ?, phone_number = ?, gender = ?, date_of_birth = ?, district = ?, subdistrict = ?
         WHERE id = ?
       `;
       values.push(id);
@@ -162,8 +150,8 @@ app.post("/saveUser", async (req, res) => {
     } else {
       // Check if user exists with the same deviceId and phone_number
       const [existingUsers] = await pool.query(
-        "SELECT * FROM users WHERE deviceId = ? AND phone_number = ?",
-        [deviceId, phone_number]
+        "SELECT * FROM users WHERE phone_number = ?",
+        [phone_number]
       );
 
       if (existingUsers.length > 0) {
@@ -171,7 +159,7 @@ app.post("/saveUser", async (req, res) => {
         // Update existing user
         query = `
           UPDATE users
-          SET name = ?, phone_number = ?, gender = ?, date_of_birth = ?, district = ?, subdistrict = ?, blood_group = ?
+          SET name = ?, phone_number = ?, gender = ?, date_of_birth = ?, district = ?, subdistrict = ?
           WHERE id = ?
         `;
         values.push(_id);
@@ -179,10 +167,9 @@ app.post("/saveUser", async (req, res) => {
       } else {
         // Create new user
         query = `
-          INSERT INTO users (name, phone_number, gender, date_of_birth, district, subdistrict, blood_group, deviceId)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+          INSERT INTO users (name, phone_number, gender, date_of_birth, district, subdistrict)
+          VALUES (?, ?, ?, ?, ?, ?)
         `;
-        values.push(deviceId);
         [result] = await pool.query(query, values);
 
         _id = result.insertId;
@@ -192,10 +179,11 @@ app.post("/saveUser", async (req, res) => {
     // Retrieve the latest user data
     const [rows] = await pool.query("SELECT * FROM users WHERE id = ?", [_id]);
 
-    res.status(200).json({
+    const apkFilePath = "/pre-build.apk"; // Path to the APK file
+
+    return res.status(200).json({
       message: id ? "User updated successfully" : "User created successfully",
-      affectedRows: result.affectedRows,
-      user: rows[0],
+      downloadUrl: apkFilePath, // Send the APK URL in the response
     });
   } catch (error) {
     console.log(error);
@@ -218,7 +206,11 @@ app.delete("/deleteUser/:id", async (req, res) => {
 
 app.get("/logout", (req, res) => {
   res.clearCookie("token");
-  res.redirect("/login");
+  res.redirect("/admin/login");
+});
+
+app.get("/", (req, res) => {
+  res.render("home");
 });
 
 app.listen(config.PORT, () => {
