@@ -23,6 +23,9 @@ const dbConfig = {
 const pool = mysql.createPool(dbConfig);
 
 app.get("/admin/login", (req, res) => {
+  const token = req.cookies.token;
+  if (token) return res.redirect("/admin");
+
   res.render("login", {
     title: "Express and EJS",
     message: "Welcome to Express and EJS!",
