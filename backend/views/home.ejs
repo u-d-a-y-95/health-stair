@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home - SERAC-Bangladesh</title>
     <style>
-      /* General Reset */
       * {
         box-sizing: border-box;
         margin: 0;
@@ -17,27 +16,6 @@
         background-color: #f4f4f9;
         color: #333;
         line-height: 1.6;
-      }
-
-      header {
-        background-color: #135178;
-        color: white;
-        padding: 30px 0;
-        text-align: center;
-      }
-
-      header h1 {
-        font-size: 2.5rem;
-        font-weight: bold;
-        margin: 0;
-      }
-
-      .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: calc(100vh - 150px);
-        padding: 20px;
       }
 
       #surveyForm {
@@ -90,64 +68,154 @@
       button:hover {
         background-color: #0f3d59;
       }
+      .holder {
+        display: flex;
+        height: 100vh;
+        flex-direction: row;
+      }
+      .left-panel {
+        flex: 1;
+        background-color: #135178;
+        color: white;
+        display: flex;
+        text-align: justify;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .qr-code-holder {
+        display: flex;
+        justify-content: center;
+        padding: 0 50px;
+      }
+
+      .qr-code {
+        width: 300px;
+        height: 300px;
+      }
+      .right-panel {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .mobile {
+        display: none;
+      }
+
+      @media only screen and (max-width: 768px) {
+        .holder {
+          flex-direction: column;
+          background-color: white;
+        }
+        .left-panel {
+          display: none;
+        }
+        #surveyForm {
+          /* background: white; */
+          padding: 20px;
+          border-radius: 0;
+          box-shadow: none;
+          max-width: 500px;
+          width: 100%;
+        }
+        .mobile {
+          display: block;
+          color: #135178;
+        }
+      }
     </style>
   </head>
   <body>
-    <header>
-      <h1>SERAC-Bangladesh</h1>
-    </header>
+    <div class="holder">
+      <div class="left-panel">
+        <div style="padding: 50px 50px 0 50px">
+          <h1 style="text-align: center">স্বাস্থ্যসিঁড়ি</h1>
+          <h3>স্বাগতম</h3>
+          <h3>প্রজনন স্বাস্থ্য সম্পর্কে সঠিক তথ্য জানুন ও সুরক্ষিত থাকুন</h3>
+          <p>
+            "স্বাস্থ্যসিঁড়ি" সিরাক-বাংলাদেশ কর্তৃক পরিচালিত SAAF / IPPF এর
+            সহযোগিতায় নিরাপদ প্রজনন স্বাস্থ্য সচেতনতা উন্নয়ন প্রকল্পের অধীন
+            প্রজনন স্বাস্থ্য বিষয়ে সকলের মধ্যে সচেতনতা বৃদ্ধি, সঠিক তথ্য এবং
+            স্বাস্থ্যকেন্দ্রে সহজ অভিগম্যতা নিশ্চিত করার লক্ষ্যে প্রস্তুত করা
+            হয়েছে। এটি শুধুমাত্র কমিউনিটিতে সচেতনতা তৈরী ও ব্যক্তিগত শিক্ষার
+            জন্য তৈরী করা হয়েছে।
+          </p>
+        </div>
+        <div class="qr-code-holder">
+          <img src="/app/app-qrcode.jpeg" class="qr-code" />
+        </div>
 
-    <div class="container">
-      <form id="surveyForm" action="/saveUser" method="POST">
-        <div class="form-group">
-          <label for="name">নাম:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="আপনার নাম লিখুন"
-            required
-          />
+        <div style="background: white; width: 100%; text-align: center">
+          <img src="/client.png" style="width: 100%" />
         </div>
-        <div class="form-group">
-          <label for="phone_number">মোবাইল নম্বর:</label>
-          <input
-            type="tel"
-            id="phone_number"
-            name="phone_number"
-            placeholder="আপনার মোবাইল নম্বর লিখুন"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="date_of_birth">জন্ম তারিখ:</label>
-          <input type="date" id="date_of_birth" name="date_of_birth" required />
-        </div>
-        <div class="form-group">
-          <label for="district">জেলা:</label>
-          <select id="district" name="district" required>
-            <option value="">জেলা নির্বাচন করুন</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="subdistrict">উপজেলা:</label>
-          <select id="subdistrict" name="subdistrict" required>
-            <option value="">উপজেলা নির্বাচন করুন</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="gender">লিঙ্গ:</label>
-          <select id="gender" name="gender" required>
-            <option value="">লিঙ্গ নির্বাচন করুন</option>
-            <option value="Male">পুরুষ</option>
-            <option value="Female">মহিলা</option>
-            <option value="Other">অন্যান্য</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <button type="submit">জমা দিন</button>
-        </div>
-      </form>
+      </div>
+
+      <div class="right-panel">
+        <form id="surveyForm" action="/saveUser" method="POST">
+          <div class="mobile">
+            <h1 style="text-align: center">স্বাস্থ্যসিঁড়ি</h1>
+          </div>
+          <div class="form-group">
+            <label for="name">নাম:</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="আপনার নাম লিখুন"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone_number">মোবাইল নম্বর:</label>
+            <input
+              type="tel"
+              id="phone_number"
+              name="phone_number"
+              placeholder="আপনার মোবাইল নম্বর লিখুন"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="date_of_birth">জন্ম তারিখ:</label>
+            <input
+              type="date"
+              id="date_of_birth"
+              name="date_of_birth"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="district">জেলা:</label>
+            <select id="district" name="district" required>
+              <option value="">জেলা নির্বাচন করুন</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="subdistrict">উপজেলা:</label>
+            <select id="subdistrict" name="subdistrict" required>
+              <option value="">উপজেলা নির্বাচন করুন</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="gender">লিঙ্গ:</label>
+            <select id="gender" name="gender" required>
+              <option value="">লিঙ্গ নির্বাচন করুন</option>
+              <option value="Male">পুরুষ</option>
+              <option value="Female">নারী</option>
+              <option value="Other">অন্যান্য</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit">জমা দিন</button>
+          </div>
+          <div class="mobile">
+            <div style="background: white; width: 100%; text-align: center">
+              <img src="/client.png" style="width: 100%" />
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
 
     <script>
@@ -313,17 +381,6 @@
 
             if (response.ok) {
               alert(result.message || "User saved successfully!");
-
-              // Trigger APK download
-              const downloadUrl = result.downloadUrl;
-              if (downloadUrl) {
-                const link = document.createElement("a");
-                link.href = downloadUrl;
-                link.download = "app-release.apk"; // Suggested file name
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-              }
             } else {
               alert(result.error || "An error occurred. Please try again.");
             }
